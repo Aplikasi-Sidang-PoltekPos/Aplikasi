@@ -71,7 +71,7 @@
   <?php $this->load->view('common/footer');?>
 
       <div class="modal fade" id="modal-kegiatan">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">Form Kegiatan</h4>
@@ -81,16 +81,26 @@
             </div>
             <div class="modal-body">
               <form id="form-kegiatan">
+                <div class="row">
+                  <div class ="col-md-6">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nama Kegiatan</label>
                   <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" placeholder="Kegiatan">
                 </div>
+                  </div>
+                </div>
+                <div class="row">
+                <div class ="col-md-4">
                 <div class="form-group">
                   <label>Koordinator</label>
                   <select class="form-control select2" style="width:100%;" name="id_koordinator" id="id_koordinator">
                     <option selected disabled>Pilih</option>
                   </select>
                 </div>
+                </div>
+                <div class ="col-md-1">
+                </div>
+                <div class="row">
                 <div class="form-group">
                 <label>Tanggal Mulai</label>
                   <div class="input-group">
@@ -113,7 +123,12 @@
                     <input type="date" class="form-control float-right" id="tgl_selesai" name="tgl_selesai">
                   </div>
                 </div>
+                    </div>
+                 </div>
+                 <div class ="row">
+                 <div class ="col-md-3">
                 <div class="form-group">
+                  
                   <label>Tahun Ajaran</label>
                   <select class="form-control" style="width: 100%;" id="angkatan" name="angkatan">
                     <?php foreach($data_tahun_ajaran->result() as $row){ ?>
@@ -121,7 +136,11 @@
                     <?php } ?>
                   </select>
                 </div>
+                    </div>
+                    <div class ="col-md-1">
+                    </div>
                 <div class="form-group">
+                
                   <label>Semester</label>
                   <select class="form-control" style="width: 100%;" id="semester" name="semester">
                     <option selected="selected">1</option>
@@ -134,18 +153,35 @@
                     <option>8</option>
                   </select>
                 </div>
+                    </div>
+                    <div class="row">
+                    <div class ="col-sm-4">
                 <div class="form-group">
                   <label>Batas Minimal Bimbingan : </label>
                   <input type="number" class="form-control" id="min_bimbingan" name="min_bimbingan" min="8" value="8">
                 </div>
+                    </div>
+                <div class ="col-md-4">
+                    </div>
+                    <div class ="col-sm-4">
                 <div class="form-group">
                   <label>Persentase Nilai Bimbingan : </label>
                   <input type="number" class="form-control" id="persentase_bimbingan" name="persentase_bimbingan" min="0" max="100" value="50">
                 </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class ="col-md-7">
+                    </div>
+                    <div class ="col-md-1">
+                    </div>
+                    <div class ="col-sm-4">
                 <div class="form-group">
                   <label>Persentasi Nilai Sidang : </label>
                   <input type="number" class="form-control" id="persentase_sidang" name="persentase_sidang" min="0" max="100" value="50">
                 </div>
+                    </div>
+                    </div>
               </form>
             </div>
             <div class="modal-footer justify-content-between">

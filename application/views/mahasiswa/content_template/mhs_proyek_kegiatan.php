@@ -17,7 +17,7 @@
 </div>
 
 <div class="modal fade" id="modal-pilih-kegiatan">
-    <div class="modal-dialog modal-default">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 Detail Proyek
@@ -25,18 +25,30 @@
             <div class="modal-body">
                 <div class="card-body">
                     <form id="form-pilih-kegiatan">
+                        <div class="row">
+                            <div class="col-sm-6">
+                            <div class ="col-md-12">
                         <div class="form-group">
                             <label >Judul Proyek</label>
                             <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Judul Proyek" name="judul_proyek">
                         </div>
-                        <div class="form-group">     
-                            <label>Abstrak</label>
-                            <textarea class="form-control"   placeholder="Abstrak" name="abstrak"></textarea>
-                        </div>
-                        <div class="form-group">     
+                            </div>
+                            
+                            <div class ="col-md-9">
+                                <div class="form-group">     
                             <label>Keyword</label>
                             <input type="text" class="form-control"   placeholder="Abstrak" name="keyword_abstrak"></textarea>
                         </div>
+                                </div>
+                                    </div>
+                            
+                            <div class ="col-md-6">
+                        <div class="form-group">     
+                            <label>Abstrak</label>
+                            <textarea class="form-control" rows="5"  placeholder="Abstrak" name="abstrak"></textarea>
+                        </div>
+                             </div>
+                            </div>
                         <div class="form-group">
                             <label>Latar Belakang</label>
                             <textarea class="form-control" placeholder="Latar Belakang" name="latar_belakang"></textarea>
@@ -49,15 +61,21 @@
                             <label>Daftar Pustaka</label>
                             <textarea class="form-control" placeholder="Daftar Pustaka" name="daftar_pustaka"></textarea>
                         </div>
+                        <div class="row">
                         <div class="form-group">     
                             <label>Kategori Proyek</label>
                             <input type="text" class="form-control"   placeholder="Abstrak" name="kategori_proyek" placeholder="ex:IoT, SCM, Data Mining"></textarea>
                         </div>
+                        <div class="col-md-2">
+                            </div>
+                            <div class="col-md-4">
                         <div class="form-group">
                             <label>Anggota</label>
                             <select class="form-control select2" style="width:100%;" name="npm_anggota" id="npm_anggota">
                                 <option selected disabled>Pilih</option>
                             </select>
+                        </div>
+                            </div>
                         </div>
                     </form>
                 </div>

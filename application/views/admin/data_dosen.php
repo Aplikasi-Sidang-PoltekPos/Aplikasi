@@ -72,7 +72,7 @@
   <?php $this->load->view('common/footer');?>
 
       <div class="modal fade" id="modal-dosen">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
 
@@ -91,18 +91,28 @@
               <!-- form start -->
               <form role="form" id="form-dosen">
                 <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-4">
                   <div class="form-group">
                     <label for="exampleInputEmail1">NIK</label>
                     <input type="text" class="form-control" id="nik" placeholder="NIK" name="nik">
                   </div>
+                      </div>
+                  <div class="col-sm-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nama</label>
                     <input type="text" class="form-control" id="nama" placeholder="Nama" name="nama">
                   </div>
+                    </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Tempat Lahir</label>
                     <input type="text" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" name="tempat_lahir">
                   </div>
+                      </div>
+                      <div class="col-sm-4">
                 <div class="form-group">
                   <label>Tanggal Lahir</label>
                   <div class="input-group">
@@ -115,6 +125,8 @@
                   </div>
                   <!-- /.input group -->
                 </div>
+                        </div>
+                      </div>
                    <div class="form-group">
                     <label for="exampleInputEmail1">Alamat</label>
                     <input type="text" class="form-control" id="alamat" placeholder="Alamat" name="alamat">
