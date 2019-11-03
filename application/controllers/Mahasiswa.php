@@ -66,11 +66,21 @@ class Mahasiswa extends CI_Controller {
 		if($data['num_rows']>0){
 			$this->session->set_userdata('id_proyek', $data['data'][0]['id_proyek']);
 			$this->session->set_userdata('status_proyek', $data['data'][0]['status_proyek']);
+			if($data['data'][0]['npm_anggota']==$_SESSION['id_user']){
+				$this->session->set_userdata('status_anggota','anggota');
+			}else{
+				$this->session->set_userdata('status_anggota','ketua');
+			}
 		}
 	}
 
 	public function Proyek($a="")
 	{
+		if(isset($_SESSION['status_anggota'])){
+			$extras['status_anggota']=$_SESSION['status_anggota'];
+		}else{
+			$extras = "";
+		}
 		switch($a){
 			case "":  
 				$data['nav_active'] = "proyek";
@@ -103,11 +113,11 @@ class Mahasiswa extends CI_Controller {
 					$search[0]['type']="where";
 					$search[0]['value'] = array('prodi'=>$_SESSION['prodi']);
 					$search[1]['type']="where";
-					$search[1]['value']=array('status_mulai'=>'1'); //Awalnya 1
+					$search[1]['value']=array('status_mulai'=>'1'); 
 					$search[2]['type']="where";
 					$search[2]['value']="semester <= '".$_SESSION['semester']."'";
 				}
-				echo $this->Tampil_Data($this->input->post('config'), "",$search);
+				echo $this->Tampil_Data($this->input->post('config'), $extras,$search);
 			break;
 			case "Data:Anggota":
 				$search[0]['type']="where";
@@ -125,6 +135,7 @@ class Mahasiswa extends CI_Controller {
 					$data['npm_anggota'] = null;
 					unset($_SESSION['id_proyek']);
 					unset($_SESSION['status_proyek']);
+					unset($_SESSION['status_anggota']);
 				}else{
 					$data['status_proyek']="1";
 				}

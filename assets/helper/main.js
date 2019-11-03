@@ -126,6 +126,34 @@ function text_setter(data, type){
   }
 }
 
+function text_setter_precise(data, type){
+  if(data instanceof FormData){
+    var temp = {};
+    data.forEach(function(value, key){
+      temp[key] = value;
+    });
+    $.each(temp, function (key, val) {
+      if($('#'+key).length){
+        if(type=="form"){
+          $('#'+key).val(val);
+        }else if(type=="text"){
+          $('#'+key).html(val);
+        }
+      }
+    });
+  }else{
+    $.each(data, function (i) {
+      $.each(data[i], function (key, val) {
+          if(type=="form"){
+            $('#'+key).val(val);
+          }else if(type=="text"){
+            $('#'+key).html(val);
+          }
+      });
+    });
+  }
+}
+
 function form_clear(id){
   $("#"+id).find("input[type=text], textarea, input[type=password], input[type=date]").val("");
 

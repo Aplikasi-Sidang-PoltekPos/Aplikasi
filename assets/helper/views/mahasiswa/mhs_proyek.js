@@ -124,6 +124,45 @@ $(function(){
       $('#modal-pilih-anggota').on('shown.bs.modal', function(e){
         refreshComboAnggota();
       });
+      $('#modal-anggota-proyek').on('click', '#accept', function(){
+        var fd = new FormData();
+        fd.append('status_acc', 'accept');
+        $.ajax({
+            url:base_url("Mahasiswa/Proyek/AccProposal"),
+            type:'post',
+            data:fd,
+            contentType: false,
+            processData: false,
+            success: function(response){
+              alert_toast(response);
+              var data = JSON.parse(response);
+              if(data.status=="success"){
+                $('#modal-anggota-proyek').modal('hide');
+                setContentData('detail');
+              }
+            }
+          });
+        });
+
+        $('#modal-anggota-proyek').on('click', '#cancel',function(){
+          var fd = new FormData();
+          fd.append('status_acc', 'cancel');
+          $.ajax({
+              url:base_url("Mahasiswa/Proyek/AccProposal"),
+              type:'post',
+              data:fd,
+              contentType: false,
+              processData: false,
+              success: function(response){
+                alert_toast(response);
+                var data = JSON.parse(response);
+                if(data.status=="success"){
+                  $('#modal-anggota-proyek').modal('hide');
+                  setContentView();
+                }
+              }
+            });
+        });
     }
   }
 });
@@ -168,7 +207,12 @@ function load_detail_data(fd){
           data.data[0].status_proyek="Anggota Belum Acc";
           if(data.data[0].npm_anggota==null){
             data.data[0].status_proyek="Anggota Menolak<br><button type='button' class='btn btn-primary' id='ajukan-anggota-ulang' data-toggle='modal' data-target='#modal-pilih-anggota'>Ajukan Ulang</button>";
+          }else if(data.extras.status_anggota=="anggota"){
+            data.data[0].status_proyek="Butuh Persetujuan Sebagai Anggota<br><button type='button' class='btn btn-primary' id='ajukan-anggota-ulang' data-toggle='modal' data-target='#modal-anggota-proyek'>Terima</button>";
           }
+          
+          $('#nama_proyek').html('Nama Proyek : '+data.data[0].nama_kegiatan);
+          $('#nama_pemohon').html('Nama Pemohon : '+data.data[0].nama_ketua);
         break;
         case "1": data.data[0].status_proyek="Belum Diterima"; break;
         case "2": data.data[0].status_proyek="Diterima"; break;
