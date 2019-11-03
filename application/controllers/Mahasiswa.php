@@ -40,16 +40,19 @@ class Mahasiswa extends CI_Controller {
 			$search[0]['value']=array('id_proyek'=>$_SESSION['id_proyek']);
 			$search[1]['type']="where";
 			$search[1]['value']=array('status_proyek'=>'0');
-			$res = json_decode($this->Tampil_Data("detail","",$search), true)['data'][0];
-			if($res['npm_anggota']==$_SESSION['id_user']){
-				$data['nama_ketua'] = $res['nama_ketua'];
-				$data['npm_ketua'] = $res['npm_ketua'];
-				$data['nama_kegiatan'] = $res['nama_kegiatan'];
-				$data['judul_proyek'] = $res['judul_proyek'];
-				$data['status'] = "anggota";
-			}else{
-				$data['status'] = "ketua";
-				$data['npm_anggota']=$res['npm_anggota'];
+			$data_src = json_decode($this->Tampil_Data("detail","",$search), true);
+			if($data_src['num_rows']>0){
+				$res = $data_src['data'][0];
+				if($res['npm_anggota']==$_SESSION['id_user']){
+					$data['nama_ketua'] = $res['nama_ketua'];
+					$data['npm_ketua'] = $res['npm_ketua'];
+					$data['nama_kegiatan'] = $res['nama_kegiatan'];
+					$data['judul_proyek'] = $res['judul_proyek'];
+					$data['status'] = "anggota";
+				}else{
+					$data['status'] = "ketua";
+					$data['npm_anggota']=$res['npm_anggota'];
+				}
 			}
 		}
 		$data = array_merge($data, $this->con_config);
