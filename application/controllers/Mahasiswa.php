@@ -103,7 +103,7 @@ class Mahasiswa extends CI_Controller {
 					$search[0]['type']="where";
 					$search[0]['value'] = array('prodi'=>$_SESSION['prodi']);
 					$search[1]['type']="where";
-					$search[1]['value']=array('status_mulai'=>'2'); //Awalnya 1
+					$search[1]['value']=array('status_mulai'=>'1'); //Awalnya 1
 					$search[2]['type']="where";
 					$search[2]['value']="semester <= '".$_SESSION['semester']."'";
 				}

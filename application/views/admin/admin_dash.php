@@ -92,17 +92,7 @@
             </div>
   <?php $this->load->view('common/footer');?>
   <script>
-    $(function(){
-      $("#save").click(function(){
-        $('#modal-default').modal('toggle');
-        Swal.fire('Success', 'Data Submitted ', 'success');
-      });
-      $("#delete").click(function(){
-
-        Swal.fire('Success', 'Data Deleted', 'success');
-      });
-
-    });
+   
   </script>
         <div class="modal fade" id="modal-default">
         <div class="modal-dialog">

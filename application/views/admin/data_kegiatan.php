@@ -143,9 +143,9 @@
                 
                   <label>Semester</label>
                   <select class="form-control" style="width: 100%;" id="semester" name="semester">
-                    <option selected="selected">1</option>
+                    <option value="1">1</option>
                     <?php for($a=2;$a<=$semester_total;$a++){ ?>
-                      <option><?=$a?></option>
+                      <option value="<?=$a?>"><?=$a?></option>
                     <?php } ?>
                   </select>
                 </div>

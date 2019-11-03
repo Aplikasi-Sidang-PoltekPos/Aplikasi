@@ -58,7 +58,7 @@ class Admin extends CI_Controller {
 				$data['nav_active'] = "kegiatan";
 				$data['nav_open'] = "";
 				$data['jscallurl'] = "admin/data_kegiatan.js";
-				$data['semester_total'] = $this->M_Admin->get_prodi(array('id_prodi'=>$_SESSION['prodi']))->semester;
+				$data['semester_total'] = $this->M_Admin->get_prodi(array('id_prodi'=>$_SESSION['prodi']))->total_semester;
 				$data['data_tahun_ajaran'] = $this->M_Mahasiswa->getAngkatan();
 				$data = array_merge($data, $this->con_config);
 				$this->load->view('admin/data_kegiatan', $data);
