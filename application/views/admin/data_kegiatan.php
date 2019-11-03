@@ -144,13 +144,9 @@
                   <label>Semester</label>
                   <select class="form-control" style="width: 100%;" id="semester" name="semester">
                     <option selected="selected">1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
+                    <?php for($a=2;$a<=$semester_total;$a++){ ?>
+                      <option><?=$a?></option>
+                    <?php } ?>
                   </select>
                 </div>
                     </div>

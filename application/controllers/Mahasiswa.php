@@ -33,6 +33,25 @@ class Mahasiswa extends CI_Controller {
 	{
 		$data['nav_active'] = "dashboard";
 		$data['nav_open'] = "";
+		$data['jscallurl'] = "mahasiswa/mhs_dash.js";
+		$data['status']="none";
+		if($this->session->userdata('id_proyek')!=null){
+			$search[0]['type']="where";
+			$search[0]['value']=array('id_proyek'=>$_SESSION['id_proyek']);
+			$search[1]['type']="where";
+			$search[1]['value']=array('status_proyek'=>'0');
+			$res = json_decode($this->Tampil_Data("detail","",$search), true)['data'][0];
+			if($res['npm_anggota']==$_SESSION['id_user']){
+				$data['nama_ketua'] = $res['nama_ketua'];
+				$data['npm_ketua'] = $res['npm_ketua'];
+				$data['nama_kegiatan'] = $res['nama_kegiatan'];
+				$data['judul_proyek'] = $res['judul_proyek'];
+				$data['status'] = "anggota";
+			}else{
+				$data['status'] = "ketua";
+				$data['npm_anggota']=$res['npm_anggota'];
+			}
+		}
 		$data = array_merge($data, $this->con_config);
 		$this->load->view('mahasiswa/mhsw_dash',$data);
 		//$this->load->view('common/footer');
@@ -41,11 +60,12 @@ class Mahasiswa extends CI_Controller {
 	public function CekProyek(){
 		$search[0]['type']="where";
 		$search[0]['value']="npm_ketua = '".$_SESSION['id_user']."' || npm_anggota = '".$_SESSION['id_user']."'";
+		$search[1]['type']="where";
+		$search[1]['value']="status_proyek != '4'";
 		$data = json_decode($this->Tampil_Data('detail', "", $search), true);
 		if($data['num_rows']>0){
-			if($data['data'][0]['status_proyek']!="0"){
-				$this->session->set_userdata('id_proyek', $data['data'][0]['id_proyek']);
-			}
+			$this->session->set_userdata('id_proyek', $data['data'][0]['id_proyek']);
+			$this->session->set_userdata('status_proyek', $data['data'][0]['status_proyek']);
 		}
 	}
 
@@ -60,10 +80,7 @@ class Mahasiswa extends CI_Controller {
 				$this->load->view('mahasiswa/mhs_proyek',$data);
 			break;
 			case "Data":  
-				$search[0]['type']="where";
-				$search[0]['value']="npm_ketua = '".$_SESSION['id_user']."' || npm_anggota = '".$_SESSION['id_user']."'";
-				$data = json_decode($this->Tampil_Data('detail', "", $search), true);
-				if($data['num_rows']<1){
+				if(!isset($_SESSION['id_proyek'])){
 					$data['col_config'] = "kegiatan";
 				}else{
 					$data['col_config'] = "detail";
@@ -86,7 +103,7 @@ class Mahasiswa extends CI_Controller {
 					$search[0]['type']="where";
 					$search[0]['value'] = array('prodi'=>$_SESSION['prodi']);
 					$search[1]['type']="where";
-					$search[1]['value']=array('status_mulai'=>'1');
+					$search[1]['value']=array('status_mulai'=>'2'); //Awalnya 1
 					$search[2]['type']="where";
 					$search[2]['value']="semester <= '".$_SESSION['semester']."'";
 				}
@@ -100,6 +117,25 @@ class Mahasiswa extends CI_Controller {
 				$search[2]['type']="where";
 				$search[2]['value']=array('prodi'=>$_SESSION['prodi']);
 				echo $this->Tampil_Data('anggota', '', $search);
+			break;
+			case "AccProposal":
+				$isi = $this->input->post();
+				$data['id_proyek'] = $_SESSION['id_proyek'];
+				if($isi['status_acc']=="cancel"){
+					$data['npm_anggota'] = null;
+					unset($_SESSION['id_proyek']);
+					unset($_SESSION['status_proyek']);
+				}else{
+					$data['status_proyek']="1";
+				}
+				$where = array('id_proyek'=>$data['id_proyek']);
+				echo $this->Ubah_Data($data, $where, 'proyek');
+			break;
+			case "AjukanAnggota":
+				$data = $this->input->post();
+				$data['id_proyek'] = $_SESSION['id_proyek'];
+				$where = array('id_proyek'=>$data['id_proyek']);
+				echo $this->Ubah_Data($data, $where, 'proyek');
 			break;
 			case "Insert":
 				$data = $this->input->post();
@@ -161,7 +197,7 @@ class Mahasiswa extends CI_Controller {
 
 	public function Bimbingan($a="")
 	{
-		if(isset($_SESSION['id_proyek'])){
+		if($this->session->userdata('status_proyek')=="2"){ //Awalnya 1
 			switch($a){
 				case "": 
 					$data['nav_active'] = "bimbingan";
@@ -197,6 +233,10 @@ class Mahasiswa extends CI_Controller {
 			case "profile" :
 				$query = $this->M_Mahasiswa->update($data);
 				$notification['message'] = "Profile Berhasil Diupdate";
+			break;
+			case "proyek":
+				$query = $this->M_Proyek->update($data, $where);
+				$notification['message'] = "Berhasil mengubah data proyek";
 			break;
 		}
 

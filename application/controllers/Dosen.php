@@ -120,7 +120,7 @@ class Dosen extends CI_Controller {
 				$total_bimbingan = $this->input->post('total_bimbingan');
 				if($total_bimbingan>=8){
 					$where = array('id_proyek'=>$_SESSION['id_proyek']);
-					$data['status_proyek'] = "2";
+					$data['status_proyek'] = "3"; //Awalnya 2
 					$notif = json_decode($this->Ubah_Data($data, $where, 'proyek'), true);
 					if($notif['status']=="success"){
 						$notif['message'] = "Mahasiswa Berhasil Disiapkan untuk sidang";
@@ -273,7 +273,7 @@ class Dosen extends CI_Controller {
 				$search[0]['type']="where";
 				$search[0]['value']=array('kegiatan.prodi'=>$_SESSION['prodi']);
 				$search[1]['type']="where";
-				$search[1]['value']=array('proyek.status_proyek'=>'0');
+				$search[1]['value']=array('proyek.status_proyek'=>'1'); //Awalnya 0
 				$search[2]['type']="where";
 				$search[2]['value']=array('proyek.id_kegiatan'=>$_SESSION['stat_koor']['id_kegiatan']);
 				//$search[3]['type']="group_by";
@@ -291,18 +291,18 @@ class Dosen extends CI_Controller {
 				$data = array_merge($data, $this->con_config);
 				$this->load->view('admin/data_dosen', $data);
 			break;
-			case "PilihPembimbing:Data":
-				$maks_anak = "(select count(*) from proyek where id_dosen_pembimbing = dosen.nik && status_proyek='1' && id_kegiatan = '".$_SESSION['stat_koor']['id_kegiatan']."') <= round((select count(*) from mahasiswa where prodi=dosen.prodi) / (select count(*) from dosen as a where a.prodi = dosen.prodi), 0)";
+			case "PilihPembimbing:Data": //Semua di :Data awalnya 1
+				$maks_anak = "(select count(*) from proyek where id_dosen_pembimbing = dosen.nik && status_proyek='2' && id_kegiatan = '".$_SESSION['stat_koor']['id_kegiatan']."') <= round((select count(*) from mahasiswa where prodi=dosen.prodi) / (select count(*) from dosen as a where a.prodi = dosen.prodi), 0)";
 				$search[0]['type']="where";
 				$search[0]['value']=array('prodi'=>$_SESSION['prodi']);
 				$search[1]['type']="where";
 				$search[1]['value']=$maks_anak;
-				$query_extras[0] = "(select count(*) from proyek where id_dosen_pembimbing = dosen.nik && status_proyek='1' && id_kegiatan = '".$_SESSION['stat_koor']['id_kegiatan']."') as total_pembimbing";
+				$query_extras[0] = "(select count(*) from proyek where id_dosen_pembimbing = dosen.nik && status_proyek='2' && id_kegiatan = '".$_SESSION['stat_koor']['id_kegiatan']."') as total_pembimbing";
 				echo $this->Tampil_Data('dosen', "", $search, $query_extras);
 			break;
 			case "PilihPembimbing:Update":
 				$data = $this->input->post();
-				$data['status_proyek']="1";
+				$data['status_proyek']="2"; //Awalnya 1
 				$where = array('id_proyek'=>$data['id_proyek']);
 				echo $this->Ubah_Data($data, $where, 'proyek');
 			break;
@@ -324,7 +324,7 @@ class Dosen extends CI_Controller {
 				$search[0]['type']="where";
 				$search[0]['value']=array('kegiatan.prodi'=>$_SESSION['prodi']);
 				$search[1]['type']="where";
-				$search[1]['value']=array('proyek.status_proyek'=>'2');
+				$search[1]['value']=array('proyek.status_proyek'=>'3'); //Awalnya 2
 				$search[2]['type']="where";
 				$search[2]['value']=array('proyek.id_kegiatan'=>$_SESSION['stat_koor']['id_kegiatan']);
 				echo $this->Tampil_Data('proyek', "", $search);

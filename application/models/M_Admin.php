@@ -35,5 +35,10 @@ class M_Admin extends CI_Model {
 		}
 	}
 
+	public function get_prodi($where){
+		return $this->db->get_where('prodi', $where)->row();
+		
+	}
+
 
 }

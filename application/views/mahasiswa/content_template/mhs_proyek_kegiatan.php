@@ -69,12 +69,12 @@
                         <div class="col-md-2">
                             </div>
                             <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Anggota</label>
-                            <select class="form-control select2" style="width:100%;" name="npm_anggota" id="npm_anggota">
-                                <option selected disabled>Pilih</option>
-                            </select>
-                        </div>
+                                <div class="form-group">
+                                    <label>Anggota</label>
+                                    <select class="form-control select2" style="width:100%;" name="npm_anggota" id="npm_anggota">
+                                        <option selected disabled>Pilih</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </form>

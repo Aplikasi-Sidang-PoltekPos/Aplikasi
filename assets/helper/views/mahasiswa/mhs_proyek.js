@@ -21,22 +21,8 @@ $(function(){
     var fd = new FormData();
     fd.append('config', config);
     if(config=="detail"){
-      $.ajax({
-        url:window.location.href+"/Data:Proyek",
-        type:'POST',
-        data:fd,
-        contentType: false,
-        processData: false,
-        success: function(response){
-          var data = JSON.parse(response);
-          switch(data.data[0].status_proyek){
-            case "0": data.data[0].status_proyek="Belum Diterima"; break;
-            case "1": data.data[0].status_proyek="Diterima"; break;
-          }
-          //GN01 Ini Yang Diganti (Text)
-          text_setter(data.data, 'text');
-        }
-      });
+      load_detail_data(fd);
+      template_event('detail');
     }else{
       var kegiatan_table = $('#data-kegiatan').DataTable({
         "ajax": {
@@ -113,11 +99,31 @@ $(function(){
           }
         });
       });
-      $("#npm_anggota").select2(
-        {
-          theme:"bootstrap"
-        }
-      );
+    }
+  }
+  function template_event(view){
+    if(view=="detail"){
+      $('#modal-pilih-anggota').on('click', '#save', function(){
+        var fd = form_data('form-ajukan-anggota');
+        $.ajax({
+          url:window.location.href+"/AjukanAnggota",
+          type:'post',
+          data:fd,
+          contentType: false,
+          processData: false,
+          success: function(response){
+            alert_toast(response);
+            var data = JSON.parse(response);
+            if(data.status=="success"){
+              setContentData('detail');
+              $('#modal-pilih-anggota').modal('toggle');
+            }
+          }
+        });
+      });
+      $('#modal-pilih-anggota').on('shown.bs.modal', function(e){
+        refreshComboAnggota();
+      });
     }
   }
 });
@@ -139,4 +145,35 @@ function refreshComboAnggota(){
         }
       }
     });
+    $("#npm_anggota").select2(
+      {
+        theme:"bootstrap"
+      }
+    );
+}
+
+
+function load_detail_data(fd){
+  $.ajax({
+    url:window.location.href+"/Data:Proyek",
+    type:'POST',
+    data:fd,
+    contentType: false,
+    processData: false,
+    success: function(response){
+      var data = JSON.parse(response);
+      switch(data.data[0].status_proyek){
+        case "0": 
+          data.data[0].status_proyek="Anggota Belum Acc";
+          if(data.data[0].npm_anggota==null){
+            data.data[0].status_proyek="Anggota Menolak<br><button type='button' class='btn btn-primary' id='ajukan-anggota-ulang' data-toggle='modal' data-target='#modal-pilih-anggota'>Ajukan Ulang</button>";
+          }
+        break;
+        case "1": data.data[0].status_proyek="Belum Diterima"; break;
+        case "2": data.data[0].status_proyek="Diterima"; break;
+      }
+      //GN01 Ini Yang Diganti (Text)
+      text_setter(data.data, 'text');
+    }
+  });
 }
