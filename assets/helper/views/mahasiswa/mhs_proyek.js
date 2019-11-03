@@ -153,6 +153,7 @@ function refreshComboAnggota(){
 }
 
 
+
 function load_detail_data(fd){
   $.ajax({
     url:window.location.href+"/Data:Proyek",
