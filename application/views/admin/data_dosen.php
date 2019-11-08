@@ -89,9 +89,12 @@
 
               <!-- /.card-header -->
               <!-- form start -->
+              
               <form role="form" id="form-dosen">
                 <div class="card-body">
                   <div class="row">
+                  <div class="col-sm-1">
+                  </div>
                     <div class="col-sm-4">
                   <div class="form-group">
                     <label for="exampleInputEmail1">NIK</label>
@@ -106,6 +109,9 @@
                     </div>
                         </div>
                         <div class="row">
+                        
+                  <div class="col-sm-1">
+                  </div>
                         <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Tempat Lahir</label>
@@ -127,29 +133,56 @@
                 </div>
                         </div>
                       </div>
+                      <div class="row">
+                  <div class="col-sm-1">
+                  </div>
+                      <div class="col-sm-10">
                    <div class="form-group">
                     <label for="exampleInputEmail1">Alamat</label>
                     <input type="text" class="form-control" id="alamat" placeholder="Alamat" name="alamat">
                   </div>
+                  </div>
+                  </div>
+                  <div class="row">
+                  <div class="col-sm-1">
+                  </div>
+                        <div class="col-sm-10">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Judul Jurnal</label>
                     <input type="text" class="form-control" id="judul_jurnal" placeholder="Judul Jurnal" name="judul_jurnal">
                   </div>
+                  </div>
+                  </div>
+                  <div class="row">
+                  <div class="col-sm-1">
+                  </div>
+                  <div class="col-sm-10">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Link Jurnal</label>
                     <input type="text" class="form-control" id="link_jurnal" placeholder="Link Jurnal" name="link_jurnal">
                   </div>
+                  </div>
+                  </div>
+                  <div class="row">
+                  <div class="col-sm-1">
+                  </div>
+                  <div class="col-sm-10">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Research Interest</label>
                     <input type="text" class="form-control" id="research_interest" placeholder="Research Interest" name="research_interest">
                   </div>
+                  </div>
+                  </div>
                 </div>
                 <!-- /.card-body -->
               </form>
+              
+              
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button id="save" type="button" class="btn btn-primary">Save changes</button>
             </div>
+            
           </div>
           <!-- /.modal-content -->
         </div>
