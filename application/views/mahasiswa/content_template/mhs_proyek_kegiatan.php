@@ -5,6 +5,12 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
+            <div class="col-md-3">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="check-ngulang">
+                    <label class="custom-control-label" for="check-ngulang">Tampil Mengulang</label>
+                </div>
+            </div>
             <table class="table" id="data-kegiatan">
                 
             </table>

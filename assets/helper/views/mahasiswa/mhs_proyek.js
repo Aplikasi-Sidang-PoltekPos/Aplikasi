@@ -27,8 +27,9 @@ $(function(){
       var kegiatan_table = $('#data-kegiatan').DataTable({
         "ajax": {
           "type":"POST",
-          "data":{
-            "config":config
+          "data":function(d){
+            d.config = config,
+            d.tampilngulang = $('#check-ngulang').prop('checked')
           },
           "url":window.location.href+"/Data:Proyek",
           "dataSrc": function(json){
@@ -44,6 +45,7 @@ $(function(){
             }, title:"Tanggal Kegiatan"
           },
           {"data": "nama_prodi", title:"Program Studi"},
+          {"data": "semester", title:"Semester"},
           {"render":
             function(data, type, row, meta){
               return '<button type="button" class="btn btn-default" id="btn-pilih-kegiatan">Ikuti</button>';
@@ -61,7 +63,7 @@ $(function(){
         "order": [[ 1, 'asc' ]],
         "dom":'t<"bottom"p>'
       });
-  
+      
       kegiatan_table.on( 'order.dt search.dt', function () {
         kegiatan_table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
             cell.innerHTML = i+1;
@@ -74,6 +76,9 @@ $(function(){
         id_kegiatan = data.id_kegiatan;
         $("#modal-pilih-kegiatan").modal('toggle');
         refreshComboAnggota();
+      });
+      $("#check-ngulang").on('change', function(){
+        kegiatan_table.ajax.reload();
       });
       $("#modal-pilih-kegiatan").on('click', '#save-pilih-kegiatan', function(){
         $("#modal-pilih-kegiatan").modal('toggle');
@@ -190,8 +195,6 @@ function refreshComboAnggota(){
       }
     );
 }
-
-
 
 function load_detail_data(fd){
   $.ajax({

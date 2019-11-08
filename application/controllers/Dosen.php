@@ -61,6 +61,9 @@ class Dosen extends CI_Controller {
 	{
 		$data['nav_active'] = "dashboard";
 		$data['nav_open'] = "";
+		if(isset($_SESSION['stat_koor'])){
+			$data['stat_koor'] = $_SESSION['stat_koor'];
+		}
 		$data = array_merge($data, $this->con_config);
 		$this->load->view('dosen/dosen_dash',$data);
 		//$this->load->view('common/footer');

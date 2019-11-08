@@ -118,7 +118,11 @@ class Mahasiswa extends CI_Controller {
 					$search[1]['type']="where";
 					$search[1]['value']=array('status_mulai'=>'1'); 
 					$search[2]['type']="where";
-					$search[2]['value']="semester <= '".$_SESSION['semester']."'";
+					if($this->input->post('tampilngulang')=='true'){
+						$search[2]['value']="semester <= '".$_SESSION['semester']."'";
+					}else{
+						$search[2]['value']="semester = '".$_SESSION['semester']."'";
+					}
 				}
 				echo $this->Tampil_Data($this->input->post('config'), $extras,$search);
 			break;
