@@ -38,6 +38,9 @@ var bimb_table = $('#data-bimbingan').DataTable({
       });
   }).draw();
 
+setInterval(function(){
+    bimb_table.ajax.reload();
+}, 5000);
 $(function(){
   $('#save').on('click', function(){
     var fd = form_data('form-bimbingan');

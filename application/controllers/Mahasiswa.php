@@ -23,6 +23,7 @@ class Mahasiswa extends CI_Controller {
 			}
 			$con_config['notification'] = json_encode($con_config['notification']);
 		}
+		
 		$con_config['profile_link'] = base_url('Mahasiswa/Profile');
 		$con_config['profile_name'] = $_SESSION['nama'];
 		$this->CekProyek();

@@ -21,6 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?=base_url('assets/theme/plugins/fontawesome-free/css/all.css')?>">
+  
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/theme/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
@@ -35,6 +36,17 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="<?=base_url('assets/theme/')?>plugins/datatables/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="<?=base_url('assets/theme/')?>plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="<?=base_url('assets/theme/')?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <style>
+    input[type=number]::webkit-inner-spin-button,
+    input[type=number]::webkit-outer-spin-button{
+      -webkit-appearance: none;
+      margin: 0
+    }
+    input[type=number] {
+      -moz-appearance:textfield; /* Firefox */
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -133,12 +145,16 @@
           <span class="badge badge-warning navbar-badge">15</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <span class="dropdown-item dropdown-header">Notifikasi</span>
           <div class="dropdown-divider"></div>
-          <a href="<?php echo base_url(); ?>assets/theme/#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
+          <?php if($status_user=="D"){
+            ?>
+            <a href="<?php echo base_url(); ?>dosen/bimbingan/" class="dropdown-item">
+              <i class="fas fa-envelope mr-2"></i> <?=$notifikasi['bimbingan']?> Bimbingan Perlu Approval
+              <span class="float-right text-muted text-sm">#</span>
+            </a>
+            <?php
+          } ?>
           <div class="dropdown-divider"></div>
           <a href="<?php echo base_url(); ?>assets/theme/#" class="dropdown-item">
             <i class="fas fa-users mr-2"></i> 8 friend requests

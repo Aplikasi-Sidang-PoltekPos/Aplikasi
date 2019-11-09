@@ -27,7 +27,6 @@ $("#dsn_search").on('keyup', function(){
   dsn_table.search( this.value ).draw();
 });
 
-
 $(function(){
   $("#save").click(function(){
       var fd = form_data('form-dosen');

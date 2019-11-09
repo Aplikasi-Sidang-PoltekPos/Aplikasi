@@ -34,7 +34,9 @@ var approval_table = $('#data-approval').DataTable({
         cell.innerHTML = i+1;
     });
   }).draw();
-
+  setInterval(function(){
+      approval_table.ajax.reload();
+  }, 5000);
   function proyek_tolak(id){
     var fd = new FormData();
     fd.append('id_proyek', id);

@@ -36,8 +36,17 @@ class M_Bimbingan extends CI_Model {
     }
   }
 
+  public function getNotifikasiBimbingan($id_dosen){
+    $this->db->select('count(*) as total_bimbingan');
+    $this->db->from('bimbingan');
+    $this->db->join('proyek', 'bimbingan.id_proyek = proyek.id_proyek');
+    $this->db->where(array('status_bimbingan'=>'0', 'id_dosen_pembimbing'=>$id_dosen));
+    return $this->db->get()->row();
+  }
+
   public function get_jumlah_bimbingan($id_proyek){
     $this->db->select('count(*) as total_bimbingan');
+    $this->db->select('(SELECT (SELECT min_bimbingan FROM kegiatan WHERE id_kegiatan = proyek.id_kegiatan) FROM proyek WHERE id_proyek = bimbingan.id_proyek) AS minimal_bimbingan, id_proyek');
     $this->db->from('bimbingan');
     $this->db->where(array('status_bimbingan'=>'1', 'id_proyek'=>$id_proyek));
     return $this->db->get()->row_array();

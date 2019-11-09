@@ -90,7 +90,7 @@
                   </div>
                 </div>
                 <div class="row">
-                <div class ="col-md-4">
+                <div class ="col-md-6">
                 <div class="form-group">
                   <label>Koordinator</label>
                   <select class="form-control select2" style="width:100%;" name="id_koordinator" id="id_koordinator">
@@ -98,86 +98,50 @@
                   </select>
                 </div>
                 </div>
-                <div class ="col-md-1">
-                </div>
-                <div class="row">
-                <div class="form-group">
-                <label>Tanggal Mulai</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
-                      </span>
-                    </div>
-                    <input type="date" class="form-control float-right" id="tgl_mulai" name="tgl_mulai">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>Tanggal Selesai</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
-                      </span>
-                    </div>
-                    <input type="date" class="form-control float-right" id="tgl_selesai" name="tgl_selesai">
-                  </div>
-                </div>
-                    </div>
                  </div>
+                 <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Tanggal Mulai - Tanggal Selesai</label>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="far fa-calendar-alt"></i>
+                          </span>
+                        </div>
+                        <input type="date" class="form-control float-right" id="tgl_mulai" name="tgl_mulai">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">-</span>
+                        </div>
+                        <input type="date" class="form-control float-right" id="tgl_selesai" name="tgl_selesai">
+                      </div>
+                    </div>
+                  </div>
+                </div>
                  <div class ="row">
-                 <div class ="col-md-3">
-                <div class="form-group">
-                  
-                  <label>Tahun Ajaran</label>
-                  <select class="form-control" style="width: 100%;" id="angkatan" name="angkatan">
-                    <?php foreach($data_tahun_ajaran->result() as $row){ ?>
-                      <option><?=$row->angkatan?></option>
-                    <?php } ?>
-                  </select>
-                </div>
+                  <div class ="col-md-3">
+                    <div class="form-group">
+                      <label>Tahun Ajaran</label>
+                      <select class="form-control" style="width: 100%;" id="angkatan" name="angkatan">
+                        <?php foreach($data_tahun_ajaran->result() as $row){ ?>
+                        <option><?=$row->angkatan?></option>
+                        <?php } ?>
+                      </select>
                     </div>
-                    <div class ="col-md-1">
+                  </div>
+                  <div class ="col-md-3">
+                    <div class="form-group">
+                      <label>Semester</label>
+                      <select class="form-control" style="width: 100%;" id="semester" name="semester">
+                        <option value="1">1</option>
+                        <?php for($a=2;$a<=$semester_total;$a++){ ?>
+                          <option value="<?=$a?>"><?=$a?></option>
+                        <?php } ?>
+                      </select>
                     </div>
-                <div class="form-group">
+                  </div>
                 
-                  <label>Semester</label>
-                  <select class="form-control" style="width: 100%;" id="semester" name="semester">
-                    <option value="1">1</option>
-                    <?php for($a=2;$a<=$semester_total;$a++){ ?>
-                      <option value="<?=$a?>"><?=$a?></option>
-                    <?php } ?>
-                  </select>
-                </div>
-                    </div>
-                    <div class="row">
-                    <div class ="col-sm-4">
-                <div class="form-group">
-                  <label>Batas Minimal Bimbingan : </label>
-                  <input type="number" class="form-control" id="min_bimbingan" name="min_bimbingan" min="8" value="8">
-                </div>
-                    </div>
-                <div class ="col-md-4">
-                    </div>
-                    <div class ="col-sm-4">
-                <div class="form-group">
-                  <label>Persentase Nilai Bimbingan : </label>
-                  <input type="number" class="form-control" id="persentase_bimbingan" name="persentase_bimbingan" min="0" max="100" value="50">
-                </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class ="col-md-7">
-                    </div>
-                    <div class ="col-md-1">
-                    </div>
-                    <div class ="col-sm-4">
-                <div class="form-group">
-                  <label>Persentasi Nilai Sidang : </label>
-                  <input type="number" class="form-control" id="persentase_sidang" name="persentase_sidang" min="0" max="100" value="50">
-                </div>
-                    </div>
-                    </div>
+              </div>
               </form>
             </div>
             <div class="modal-footer justify-content-between">

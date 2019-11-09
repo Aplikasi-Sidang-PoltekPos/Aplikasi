@@ -8,7 +8,8 @@ var columns = [
   },
   {"data":"nama_koor", title: "Koordinator"},
   {"data": "angkatan", title:"Tahun Ajaran"},
-  {"data": "semester", title:"Semester"},
+  {"data": "semester", title:"Semester"}
+  /*,
   {"render":
     function(data, type, row, meta){
       switch(row.status_mulai){
@@ -17,7 +18,7 @@ var columns = [
         case "2": return "Selesai"; break;
       }
     }, title:"Status"
-  }
+  }*/
 ];
 var kegiatan_table = setting_table(window.location.href+"/Data", columns);
 $(function(){
@@ -50,7 +51,7 @@ $(function(){
   $("#form-kegiatan-modal").click(function(){
     $("#id_koordinator").empty();
     $.ajax({
-      url:window.location.href+"/DataKoor",
+      url:base_url("Admin/Kegiatan/DataKoor"),
       type:'get',
       contentType: false,
       processData: false,
@@ -62,6 +63,8 @@ $(function(){
             var row = data.data[i];
             $("#id_koordinator").append('<option value = "'+row.nik+'">'+row.nama+'</option>');
           });
+        }else{
+          $("#id_koordinator").append('<option value = "" disabled selected>Tidak Ada Dosen Tersedia</option>');
         }
       }
     });
@@ -91,13 +94,7 @@ $(function(){
     Swal.fire('Success', 'Data Deleted', 'success');
   });
 
-  $('#persentase_sidang').on('change', function(){
-    hitung_persentase('sidang');
-  });
-
-  $('#persentase_bimbingan').on('change', function(){
-    hitung_persentase('bimbing');
-  });
+  
   
 });
 

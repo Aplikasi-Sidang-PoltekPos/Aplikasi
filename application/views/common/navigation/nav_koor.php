@@ -7,6 +7,12 @@
     </p>
   </a>
   <ul class="nav nav-treeview">
+  <li class="nav-item">
+      <a href="<?php echo base_url('Dosen/SettingProyek'); ?>" class="nav-link <?= nav_setting('setting_proyek', $nav_active); ?>">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Pengaturan Proyek</p>
+      </a>
+    </li>
     <li class="nav-item">
       <a href="<?php echo base_url('Dosen/Approval'); ?>" class="nav-link <?= nav_setting('approval_proposal', $nav_active); ?>">
         <i class="far fa-circle nav-icon"></i>

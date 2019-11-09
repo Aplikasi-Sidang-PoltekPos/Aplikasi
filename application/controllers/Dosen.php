@@ -9,6 +9,7 @@ class Dosen extends CI_Controller {
 		$this->load->model('M_Dosen');
 		$this->load->model('M_Proyek');
 		$this->load->model('M_Bimbingan');
+		$this->load->model('M_Kegiatan');
 		$con_config['navigation'] = "nav_dosen";
 		$this->load->helper('auth');
 		if(CallLogin($this->session->userdata, "D")!=""){
@@ -38,7 +39,12 @@ class Dosen extends CI_Controller {
 		
 		$con_config['profile_name'] = $_SESSION['nama'];
 		$con_config['profile_link'] = base_url('Dosen/Profile');
-
+		$con_config['status_user'] = 'D';
+		if(!isset($_SESSION['notifikasi_bimbingan'])){
+			$data = $this->M_Bimbingan->getNotifikasiBimbingan($_SESSION['id_user']);
+			$_SESSION['notifikasi_bimbingan'] = $data->total_bimbingan;
+		}
+		$con_config['notifikasi']['bimbingan'] = $_SESSION['notifikasi_bimbingan'];
 		if(isset($_SESSION['notification'])){
 			$con_config['notification'] = $_SESSION['notification'];
 		}
@@ -67,6 +73,28 @@ class Dosen extends CI_Controller {
 		$data = array_merge($data, $this->con_config);
 		$this->load->view('dosen/dosen_dash',$data);
 		//$this->load->view('common/footer');
+	}
+
+	public function SettingProyek($a=""){
+		switch($a){
+			case "":
+				$data['nav_active'] = "setting_proyek";
+				$data['nav_open'] = "koordinator";
+				$data['jscallurl']="dosen/dosen_setting_proyek.js";
+				
+				$data = array_merge($data, $this->con_config);
+				$this->load->view('dosen/dosen_setting_proyek',$data);
+			break;
+			case "Data":
+				$search[0]['type']="where";
+				$search[0]['value']=array('id_kegiatan'=>$_SESSION['stat_koor']['id_kegiatan']);
+				$data['data_kegiatan'] = json_decode($this->Tampil_Data('kegiatan', '', $search));
+				$data['data_parameter'] = json_decode($this->Tampil_Data('kegiatan_progress', '', $search[0]['value']));
+				echo json_encode($data);
+			break;
+			case "TambahSetting":
+			break;
+		}
 	}
 
 	public function Bimbingan($a="")
@@ -193,6 +221,8 @@ class Dosen extends CI_Controller {
 			case "dosen": $db_call = $this->M_Dosen->get_dosen($where, $query_extras); break;
 			case "bimbingan": $db_call = $this->M_Bimbingan->get_bimbingan($where); break;
 			case "proyek": $db_call = $this->M_Proyek->get_proyek($where); break;
+			case "kegiatan": $db_call = $this->M_Kegiatan->get_kegiatan($where); break;
+			case "kegiatan_progress": $db_call = $this->M_Kegiatan->get_kegiatan_progress($where);
 		}
 		if($db_call['status']=='1'){
 			$data['data'] = $db_call['isi']->result();

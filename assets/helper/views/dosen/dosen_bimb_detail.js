@@ -1,3 +1,4 @@
+var refreshData = true;
 var bimb_table = $('#data-bimbingan').DataTable({
     "ajax": {
       "type":"POST",
@@ -6,7 +7,11 @@ var bimb_table = $('#data-bimbingan').DataTable({
       },
       "url":window.location.href+":Data",
       "dataSrc": function(json){
-        activate_tombol_sidang(json.total_bimbingan);
+        if(parseInt(json.total_bimbingan)>=parseInt(json.minimal_bimbingan)){
+            activate_tombol_sidang('1');
+        }else{
+            activate_tombol_sidang('0');
+        }
         return json.data;
       }
     },
@@ -43,6 +48,9 @@ var bimb_table = $('#data-bimbingan').DataTable({
   }).draw();
 
 $(function(){
+    setInterval(function(){
+        bimb_table.ajax.reload();
+    }, 5000);
     $("#data-bimbingan tbody").on('click', '#approve', function(){
         var data = bimb_table.row( $(this).parents('tr') ).data();
         var fd = {id_bimbingan:data.id_bimbingan, id_proyek:data.id_proyek};
@@ -83,9 +91,9 @@ function approve_bimbingan(data){
     
 }
 
-function activate_tombol_sidang(total){
+function activate_tombol_sidang(status){
     var tombol_sidang = $('#button-sidang');
-    if(total>=8){
+    if(status=='1'){
         $('#button-sidang').on('click', function(){
             $.redirect(window.location.href+":Sidang", {total_bimbingan:total});
         });

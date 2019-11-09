@@ -45,6 +45,18 @@ class M_Kegiatan extends CI_Model {
     }
   }
 
+  public function get_kegiatan_progress($where){
+    $this->db->select('*');
+    $this->db->from('kegiatan_progress');
+    $this->db->where($where);
+    $isi = $this->db->get();
+    if($isi){
+      return array('status'=>'1','isi'=>$isi);
+    }else{
+      return array('status'=>'0', 'message'=>$this->db->error());
+    }
+  }
+
 	public function update_kegiatan($data, $where)
 	{
 		$this->db->where($where);
