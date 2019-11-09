@@ -10,6 +10,7 @@ class Dosen extends CI_Controller {
 		$this->load->model('M_Proyek');
 		$this->load->model('M_Bimbingan');
 		$this->load->model('M_Kegiatan');
+		$this->load->model('M_Default');
 		$con_config['navigation'] = "nav_dosen";
 		$this->load->helper('auth');
 		if(CallLogin($this->session->userdata, "D")!=""){
@@ -89,10 +90,23 @@ class Dosen extends CI_Controller {
 				$search[0]['type']="where";
 				$search[0]['value']=array('id_kegiatan'=>$_SESSION['stat_koor']['id_kegiatan']);
 				$data['data_kegiatan'] = json_decode($this->Tampil_Data('kegiatan', '', $search));
-				$data['data_parameter'] = json_decode($this->Tampil_Data('kegiatan_progress', '', $search[0]['value']));
+				$data['data_progress'] = json_decode($this->Tampil_Data('kegiatan_progress', '', $search[0]['value']));
 				echo json_encode($data);
 			break;
-			case "TambahSetting":
+			case "SendSetting":
+				$data = $this->input->post();
+				switch($data['condition']){
+					case "insert":
+						unset($data['condition']);
+						$data['id_kegiatan'] = $_SESSION['stat_koor']['id_kegiatan'];
+						echo $this->Tambah_Data($data, 'kegiatan_progress');
+					break;
+				}
+			break;
+			case "UpdateProyek":
+				$data = $this->input->post();
+				$data['id_kegiatan'] = $_SESSION['stat_koor']['id_kegiatan'];
+				echo $this->Ubah_Data($data, array('id_kegiatan'=>$data['id_kegiatan']), 'kegiatan');
 			break;
 		}
 	}
@@ -263,16 +277,20 @@ class Dosen extends CI_Controller {
 		switch($table){
 			//case "dosen": $query = $this->M_Dosen->insert_dosen($data); break;
 			case "proyek" :
-				$query = $this->M_Proyek->update($data, $where);
+				$query = $this->M_Default->update($data, $where, 'proyek');
 				$notification['message'] = "Proyek Berhasil Di Approve";
 			break;
 			case "bimbingan":
-				$query = $this->M_Bimbingan->update($data, $where);
+				$query = $this->M_Default->update($data, $where, 'bimbingan');
 				$notification['message'] = "Bimbingan Berhasil Di Approve";
 			break;
 			case "profile":
-				$query = $this->M_Dosen->update($data, $where);
+				$query = $this->M_Default->update($data, $where, 'dosen');
 				$notification['message'] = "Dosen Berhasil diubah";
+			break;
+			case "kegiatan":
+				$query = $this->M_Default->update($data, $where, 'kegiatan');
+				$notification['message'] = "Pengaturan berhasil Diperbaharui";
 			break;
 		}
 
@@ -290,6 +308,29 @@ class Dosen extends CI_Controller {
 		return json_encode($notification);
 	}
 
+	public function Tambah_Data($data, $table){
+		$query = "";
+		switch($table){
+			//case "dosen": $query = $this->M_Dosen->insert_dosen($data); break;
+			case "kegiatan_progress" :
+				$query = $this->M_Default->insert($data, 'kegiatan_progress');
+				$notification['message'] = "Progress Kegiatan Berhasil Ditambah";
+			break;
+		}
+
+		if($query['status']=='1'){
+			$notification['status'] = "success";
+			if(!isset($notification['message'])){
+				$notification['message'] = "Data berhasil disetor ke pusat data";
+			}
+			$notification['title'] = "YEAY!";
+		}else{
+			$notification['status'] = "error";
+			$notification['message'] = "Terdapat error ".$query['message']['message']." (".$query['message']['code'].")";
+			$notification['title'] = "Aww";
+		}
+		return json_encode($notification);
+	}
 	//Koordinator
 
 	public function Approval($a="")

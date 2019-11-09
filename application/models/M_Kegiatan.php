@@ -3,15 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Kegiatan extends CI_Model {
 
-	public function insert_kegiatan($data)
-	{
-    if($this->db->insert('kegiatan',$data)){
-      return array('status'=>'1');
-    }else{
-      return array('status'=>'0', 'message'=>$this->db->error());
-    }
-	}
-
   public function get_kegiatan($cond=""){
     $this->db->select("*");
     $this->db->select("(select nama from dosen where nik=kegiatan.id_koordinator) as nama_koor");
@@ -56,14 +47,4 @@ class M_Kegiatan extends CI_Model {
       return array('status'=>'0', 'message'=>$this->db->error());
     }
   }
-
-	public function update_kegiatan($data, $where)
-	{
-		$this->db->where($where);
-    if($this->db->update('kegiatan',$data)){
-      return array('status'=>'1');
-    }else{
-      return array('status'=>'0', 'message'=>$this->db->error());
-    }
-	}
 }

@@ -16,6 +16,7 @@ class Admin extends CI_Controller {
 		$this->load->model('M_Mahasiswa');
 		$this->load->model('M_Dosen');
 		$this->load->model('M_Kegiatan');
+		$this->load->model('M_Default');
 		$con_config['navigation'] = "nav_admin";
 		$this->load->helper('auth');
 		if(CallLogin($this->session->userdata, "A")!=""){
@@ -117,11 +118,11 @@ class Admin extends CI_Controller {
 		$query = "";
 		switch($table){
 			case "dosen":
-				$query = $this->M_Dosen->insert_dosen($data);
+				$query = $this->M_Default->insert($data, 'dosen');
 				$notification['message']="Dosen berhasil ditambahkan";
 			break;
 			case "kegiatan" :
-				$query = $this->M_Kegiatan->insert_kegiatan($data);
+				$query = $this->M_Kegiatan->insert($data, 'kegiatan');
 				$notification['message']="Kegiatan berhasil ditambahkan";
 			break;
 		}
@@ -145,7 +146,7 @@ class Admin extends CI_Controller {
 		switch($table){
 			//case "dosen": $query = $this->M_Dosen->insert_dosen($data); break;
 			case "kegiatan" :
-				$query = $this->M_Kegiatan->update_kegiatan($data, $where);
+				$query = $this->M_Default->update($data, $where, 'kegiatan');
 				$notification['message'] = "Kegiatan Berhasil Diubah";
 			break;
 		}
@@ -239,7 +240,7 @@ class Admin extends CI_Controller {
 					$isi[$col['b']] = $row[$col['b']];
 					$isi[$col['c']] = $row[$col['c']];
 					$isi['prodi'] = $_SESSION['prodi'];
-					$query = $this->M_Mahasiswa->insert_mahasiswa($isi);
+					$query = $this->M_Default->insert($isi, 'mahasiswa');
 					if($query['status']=='1'){
 						$total_masuk++;
 					}else if($query['message']['code']!='1062'){

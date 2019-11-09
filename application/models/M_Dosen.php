@@ -3,15 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_Dosen extends CI_Model {
 
-	public function insert_dosen($data)
-	{
-    if($this->db->insert('dosen',$data)){
-      return array('status'=>'1');
-    }else{
-      return array('status'=>'0', 'message'=>$this->db->error());
-    }
-	}
-
 	public function get_dosen($cond="", $query_extras=""){
 	$this->db->select("*");
 	if($query_extras!=""){

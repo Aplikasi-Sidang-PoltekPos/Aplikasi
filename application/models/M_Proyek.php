@@ -52,17 +52,6 @@ class M_Proyek extends CI_Model {
     }
   }
 
-  public function update($data, $where)
-	{
-		$this->db->where($where);
-    if($this->db->update('proyek',$data)){
-      //echo $this->db->last_query();
-      return array('status'=>'1');
-    }else{
-      return array('status'=>'0', 'message'=>$this->db->error());
-    }
-	}
-
   public function delete($data){
     $this->db->where($data);
     $query = $this->db->delete('proyek');
