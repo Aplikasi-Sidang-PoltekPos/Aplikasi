@@ -3,6 +3,19 @@
     <!-- Content Header (Page header) -->
 
     <section class="content-header" id="#heading">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-body justify-content-center">
+            <ul class="progress-indicator">
+              <li class="completed"> <span class="bubble"></span> Step 1. </li>
+              <li class="completed"> <span class="bubble"></span> Step 2. </li>
+              <li> <span class="bubble"></span> Step 3. </li>
+              <li> <span class="bubble"></span> Step 4. </li>
+              <li> <span class="bubble"></span> Step 5. </li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <?php if($status=="anggota"){ ?>
       <div class="container-fluid" >
         <div class="alert alert-info alert-dismissible">

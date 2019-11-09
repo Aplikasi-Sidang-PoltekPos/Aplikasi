@@ -10,6 +10,7 @@ class Mahasiswa extends CI_Controller {
 		$this->load->model('M_Kegiatan');
 		$this->load->model('M_Proyek');
 		$this->load->model('M_Bimbingan');
+		$this->load->model('M_Default');
 		$con_config['navigation'] = "nav_mhs";
 		$this->load->helper('auth');
 		if(CallLogin($this->session->userdata, "M")!=""){
@@ -68,8 +69,12 @@ class Mahasiswa extends CI_Controller {
 		$search[1]['value']="status_proyek != '4'";
 		$data = json_decode($this->Tampil_Data('detail', "", $search), true);
 		if($data['num_rows']>0){
-			$this->session->set_userdata('id_proyek', $data['data'][0]['id_proyek']);
-			$this->session->set_userdata('status_proyek', $data['data'][0]['status_proyek']);
+			$data_sess = array(
+				'id_proyek'=>$data['data'][0]['id_proyek'],
+				'status_proyek'=>$data['data'][0]['status_proyek'],
+				'id_kegiatan'=>$data['data'][0]['id_kegiatan']
+			);
+			$this->session->set_userdata($data_sess);
 			if($data['data'][0]['npm_anggota']==$_SESSION['id_user']){
 				$this->session->set_userdata('status_anggota','anggota');
 			}else{
@@ -170,11 +175,11 @@ class Mahasiswa extends CI_Controller {
 		$notification = "";
 		switch($table){
 			case "detail":
-				$query = $this->M_Proyek->insert($data);
+				$query = $this->M_Default->insert($data, 'proyek');
 				$notification['message']="Proyek berhasil ditambahkan";
 			break;
 			case "bimbingan":
-				$query = $this->M_Bimbingan->insert($data);
+				$query = $this->M_Default->insert($data, 'bimbingan');
 				$notification['message']="Bimbingan berhasil ditambahkan";
 			break;
 		}
@@ -200,6 +205,7 @@ class Mahasiswa extends CI_Controller {
 			case "detail": $db_call = $this->M_Proyek->get_proyek($query_extras); break;
 			case "bimbingan": $db_call = $this->M_Bimbingan->get_bimbingan($query_extras); break;
 			case "anggota": $db_call = $this->M_Mahasiswa->get_mahasiswa($query_extras); break;
+			case "progress": $db_call = $this->M_Kegiatan->get_kegiatan_progress($query_extras);
 		}
 
 		if($db_call['status']=='1'){
@@ -235,6 +241,10 @@ class Mahasiswa extends CI_Controller {
 					$data['id_proyek'] = $_SESSION['id_proyek'];
 					echo $this->Tambah_Data($data, 'bimbingan');
 				break;
+				case "GetProgress":
+					$search = array('id_kegiatan'=>$_SESSION['id_kegiatan']);
+					echo $this->Tampil_Data('progress','',$search);
+				break;
 			}
 		}else{
 			$data['nav_active'] = "bimbingan";
@@ -250,11 +260,11 @@ class Mahasiswa extends CI_Controller {
 		switch($table){
 			//case "dosen": $query = $this->M_Dosen->insert_dosen($data); break;
 			case "profile" :
-				$query = $this->M_Mahasiswa->update($data);
+				$query = $this->M_Default->update($data, 'mahasiswa');
 				$notification['message'] = "Profile Berhasil Diupdate";
 			break;
 			case "proyek":
-				$query = $this->M_Proyek->update($data, $where);
+				$query = $this->M_Default->update($data, $where, 'proyek');
 				$notification['message'] = "Berhasil mengubah data proyek";
 			break;
 		}
@@ -296,7 +306,7 @@ class Mahasiswa extends CI_Controller {
 				if(isset($data['semester'])){
 					$_SESSION['semester'] = $data['semester'];
 				}
-				echo $this->Ubah_Data($data, "", 'profile');
+				echo $this->Ubah_Data($data, array('npm'=>$_SESSION['id_user']), 'profile');
 			break;
 		}
 	}

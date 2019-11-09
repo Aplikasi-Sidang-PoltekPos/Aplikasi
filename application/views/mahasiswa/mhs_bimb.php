@@ -60,7 +60,12 @@
                     <input class="form-control" type="date" name="tgl_bimbingan">
                   </div>
                   <div class="form-group">
-                    <label>Pembahasan</label>
+                    <label>Tema Pembahasan</label>
+                    <select class="form-control select2" style="width:100%;" name="id_progress" id="id_progress">
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan</label>
                     <textarea class="form-control" rows="3" placeholder="Pembahasan" name="keterangan"></textarea>
                   </div>
                 </div>

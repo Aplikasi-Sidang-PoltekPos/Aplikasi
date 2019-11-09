@@ -41,6 +41,31 @@ var bimb_table = $('#data-bimbingan').DataTable({
 setInterval(function(){
     bimb_table.ajax.reload();
 }, 5000);
+load_progress_combo();
+function load_progress_combo(){
+    $("#id_progress").empty();
+    $.ajax({
+      url:base_url("Mahasiswa/Bimbingan/GetProgress"),
+      type:'get',
+      contentType: false,
+      processData: false,
+      success: function(response){
+        var data = JSON.parse(response);
+        if(data.data.length>0){
+          $("#id_progress").append('<option value = "" disabled selected>Pilih</option>');
+          $.each(data.data, function(i){
+            var row = data.data[i];
+            $("#id_progress").append('<option value = "'+row.id_progress+'">'+row.judul_progress+'</option>');
+          });
+        }
+      }
+    });
+    $("#id_progress").select2(
+      {
+        theme:"bootstrap"
+      }
+    );
+}
 $(function(){
   $('#save').on('click', function(){
     var fd = form_data('form-bimbingan');

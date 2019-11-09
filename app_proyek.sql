@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2019 at 01:33 PM
+-- Generation Time: Nov 09, 2019 at 04:41 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -73,51 +73,73 @@ CREATE TABLE `bimbingan` (
   `catatan` varchar(300) NOT NULL,
   `status_bimbingan` int(1) NOT NULL,
   `id_proyek` int(16) NOT NULL,
-  `nilai_bimbingan` int(100) NOT NULL DEFAULT '0'
+  `nilai_bimbingan` int(100) NOT NULL DEFAULT '0',
+  `id_progress` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bimbingan`
 --
 
-INSERT INTO `bimbingan` (`id_bimbingan`, `tgl_bimbingan`, `keterangan`, `catatan`, `status_bimbingan`, `id_proyek`, `nilai_bimbingan`) VALUES
-(1, '2019-10-03', 'qwfqqfw', '', 1, 3, 0),
-(2, '2019-10-04', 'qwfqqfwa', '', 1, 3, 0),
-(3, '2019-10-05', 'qwfqqfwa', '', 1, 3, 0),
-(4, '2019-10-06', 'qwfqqfwa', '', 1, 3, 0),
-(5, '2019-10-07', 'qwfqqfwa', '', 1, 3, 0),
-(6, '2019-10-08', 'qwfqqfwa', '', 1, 3, 0),
-(7, '2019-10-09', 'qwfqqfwa', '', 1, 3, 0),
-(8, '2019-10-10', 'qwfqqfwa', '', 1, 3, 0),
-(9, '2019-10-03', 'iewfoiwe', '', 1, 5, 0),
-(10, '2019-10-07', 'asfasfas', '', 1, 7, 0),
-(11, '2019-10-08', 'asfasfasasfsafsa', '', 1, 7, 0),
-(12, '2019-10-11', 'wefwef', '', 1, 7, 0),
-(13, '2019-10-12', 'wgwegwegweweg', '', 1, 7, 0),
-(14, '2019-10-13', 'wgwegwegwewwegwegweeg', '', 1, 7, 0),
-(15, '2019-10-14', 'wgwegwegwwegwegewgwewwegwegweega', '', 1, 7, 0),
-(16, '2019-10-15', 'wgwegwegwwegwegewgwewwegwegweega', '', 1, 7, 0),
-(17, '2019-10-16', 'wgwegwegwwegwegewgwewwegwegweega', '', 1, 7, 0),
-(18, '2019-10-10', 'awfaw', '', 1, 4, 0),
-(19, '2019-10-11', 'awfaw', '', 1, 4, 0),
-(20, '2019-10-12', 'awfaw', '', 1, 4, 0),
-(21, '2019-10-14', 'awfaw', '', 1, 4, 0),
-(22, '2019-10-15', 'awfaw', '', 1, 4, 0),
-(23, '2019-10-16', 'awfaw', '', 1, 4, 0),
-(24, '2019-10-17', 'awfaw', '', 1, 4, 0),
-(25, '2019-10-18', 'awfaw', '', 1, 4, 0),
-(26, '2019-10-10', 'ugvtyvty', 'qwfwqfqw', 1, 6, 0),
-(27, '2019-10-15', 'hahahaha', 'oqeufuqeq', 1, 6, 0),
-(28, '2019-10-24', 'protyekkfcakepoojd', '', 1, 6, 0),
-(29, '2019-10-31', 'geloood', '', 1, 6, 0),
-(30, '2019-11-06', 'geloood wkwk', '', 1, 6, 0),
-(31, '2019-11-13', 'GELUD TEROOOS', '', 1, 6, 0),
-(32, '2019-11-14', 'GELUD TEROOOS', '', 1, 6, 0),
-(33, '2019-11-15', 'GELUD TEROOOS', '', 1, 6, 0),
-(34, '2019-11-05', 'wddwaadwa', 'gud dgud', 1, 9, 100),
-(35, '2019-10-15', 'asfsaf', '', 0, 7, 0),
-(36, '2019-10-16', 'coba doang', '', 0, 7, 0),
-(37, '2019-11-06', 'hntjutjutju', '', 0, 3, 0);
+INSERT INTO `bimbingan` (`id_bimbingan`, `tgl_bimbingan`, `keterangan`, `catatan`, `status_bimbingan`, `id_proyek`, `nilai_bimbingan`, `id_progress`) VALUES
+(1, '2019-10-03', 'qwfqqfw', '', 1, 3, 0, 0),
+(2, '2019-10-04', 'qwfqqfwa', '', 1, 3, 0, 0),
+(3, '2019-10-05', 'qwfqqfwa', '', 1, 3, 0, 0),
+(4, '2019-10-06', 'qwfqqfwa', '', 1, 3, 0, 0),
+(5, '2019-10-07', 'qwfqqfwa', '', 1, 3, 0, 0),
+(6, '2019-10-08', 'qwfqqfwa', '', 1, 3, 0, 0),
+(7, '2019-10-09', 'qwfqqfwa', '', 1, 3, 0, 0),
+(8, '2019-10-10', 'qwfqqfwa', '', 1, 3, 0, 0),
+(9, '2019-10-03', 'iewfoiwe', '', 1, 5, 0, 0),
+(10, '2019-10-07', 'asfasfas', '', 1, 7, 0, 0),
+(11, '2019-10-08', 'asfasfasasfsafsa', '', 1, 7, 0, 0),
+(12, '2019-10-11', 'wefwef', '', 1, 7, 0, 0),
+(13, '2019-10-12', 'wgwegwegweweg', '', 1, 7, 0, 0),
+(14, '2019-10-13', 'wgwegwegwewwegwegweeg', '', 1, 7, 0, 0),
+(15, '2019-10-14', 'wgwegwegwwegwegewgwewwegwegweega', '', 1, 7, 0, 0),
+(16, '2019-10-15', 'wgwegwegwwegwegewgwewwegwegweega', '', 1, 7, 0, 0),
+(17, '2019-10-16', 'wgwegwegwwegwegewgwewwegwegweega', '', 1, 7, 0, 0),
+(18, '2019-10-10', 'awfaw', '', 1, 4, 0, 0),
+(19, '2019-10-11', 'awfaw', '', 1, 4, 0, 0),
+(20, '2019-10-12', 'awfaw', '', 1, 4, 0, 0),
+(21, '2019-10-14', 'awfaw', '', 1, 4, 0, 0),
+(22, '2019-10-15', 'awfaw', '', 1, 4, 0, 0),
+(23, '2019-10-16', 'awfaw', '', 1, 4, 0, 0),
+(24, '2019-10-17', 'awfaw', '', 1, 4, 0, 0),
+(25, '2019-10-18', 'awfaw', '', 1, 4, 0, 0),
+(26, '2019-10-10', 'ugvtyvty', 'qwfwqfqw', 1, 6, 0, 0),
+(27, '2019-10-15', 'hahahaha', 'oqeufuqeq', 1, 6, 0, 0),
+(28, '2019-10-24', 'protyekkfcakepoojd', '', 1, 6, 0, 0),
+(29, '2019-10-31', 'geloood', '', 1, 6, 0, 0),
+(30, '2019-11-06', 'geloood wkwk', '', 1, 6, 0, 0),
+(31, '2019-11-13', 'GELUD TEROOOS', '', 1, 6, 0, 0),
+(32, '2019-11-14', 'GELUD TEROOOS', '', 1, 6, 0, 0),
+(33, '2019-11-15', 'GELUD TEROOOS', '', 1, 6, 0, 0),
+(34, '2019-11-05', 'wddwaadwa', 'gud dgud', 1, 9, 100, 0),
+(35, '2019-10-15', 'asfsaf', '', 0, 7, 0, 0),
+(36, '2019-10-16', 'coba doang', '', 0, 7, 0, 0),
+(37, '2019-11-06', 'hntjutjutju', '', 0, 3, 0, 0),
+(38, '2019-11-08', 'faf', '', 0, 5, 0, 0),
+(39, '2019-11-08', 'faf', '', 0, 5, 0, 0),
+(40, '2019-11-08', 'fafaa', '', 0, 5, 0, 0),
+(41, '2019-11-08', 'fafaaafsa', '', 0, 5, 0, 0),
+(42, '2019-11-08', 'qfqfwqfq', '', 0, 5, 0, 0),
+(43, '2019-11-08', 'qfqfwqfqaaa', '', 0, 5, 0, 0),
+(44, '2019-11-08', 'a', '', 0, 5, 0, 0),
+(45, '2019-11-08', 'biuiu', '', 0, 4, 0, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bimbingan_progress`
+--
+
+CREATE TABLE `bimbingan_progress` (
+  `id_bimbingan_progress` int(36) NOT NULL,
+  `nama_progress` varchar(55) NOT NULL,
+  `status_penyelesaian` int(1) NOT NULL,
+  `id_bimbingan` int(24) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -143,6 +165,7 @@ CREATE TABLE `dosen` (
 
 INSERT INTO `dosen` (`nik`, `nama`, `tgl_lahir`, `tempat_lahir`, `alamat`, `judul_jurnal`, `link_jurnal`, `research_interest`, `prodi`) VALUES
 ('3217061702990001', 'Luthfi 4', '2019-09-24', 'Bandung', 'b', 'Coba', 'google.com', 'Riset Doang', '13'),
+('3217061702990002', 'Luthfi 5', '2019-09-24', 'Bandung', 'b', 'Coba', 'google.com', 'Riset Doang', '13'),
 ('3217061702990004', 'Luthfi', '2019-09-21', 'Bandung', 'bb', 'qwfwq', 'aa.com', 'Cpbaom', '14'),
 ('3217061702990005', 'Luthfi 2q', '2019-09-05', 'Bandung', 'cc', 'Cobain Aja Googl', 'google.com', 'Coba', '14'),
 ('3217061702990006', 'Luthfi 3', '2019-09-04', 'Bandung', 'AJbfuiqwfwq', 'qfqwwqf', 'abc.com', 'CCC', '14'),
@@ -183,19 +206,47 @@ CREATE TABLE `kegiatan` (
   `semester` char(1) NOT NULL,
   `min_bimbingan` int(2) NOT NULL,
   `persentase_sidang` int(3) NOT NULL,
-  `persentase_bimbingan` int(3) NOT NULL
+  `persentase_bimbingan` int(3) NOT NULL,
+  `persentase_progress` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kegiatan`
 --
 
-INSERT INTO `kegiatan` (`id_kegiatan`, `prodi`, `nama_kegiatan`, `jenis_kegiatan`, `id_koordinator`, `status_mulai`, `angkatan`, `tgl_mulai`, `tgl_selesai`, `semester`, `min_bimbingan`, `persentase_sidang`, `persentase_bimbingan`) VALUES
-(18, '14', 'Proyek I', NULL, '3217061702990004', 1, '2017/2018', '2019-10-01', '2019-10-09', '1', 10, 0, 0),
-(19, '14', 'Proyek II', NULL, '3217061702990005', 0, '2017/2018', '2019-10-01', '2019-10-09', '2', 22, 0, 0),
-(20, '13', 'Coba', NULL, '3217061702990001', 1, '2017/2018', '2019-10-09', '2019-10-24', '4', 10, 0, 0),
-(21, '14', 'qfqwf', NULL, '3217061702990005', 0, '2', '2019-10-17', '2019-10-31', '1', 8, 43, 57),
-(22, '13', 'proyekyej', NULL, '3217061702990001', 1, '2', '2019-10-29', '2019-10-29', '1', 9, 80, 20);
+INSERT INTO `kegiatan` (`id_kegiatan`, `prodi`, `nama_kegiatan`, `jenis_kegiatan`, `id_koordinator`, `status_mulai`, `angkatan`, `tgl_mulai`, `tgl_selesai`, `semester`, `min_bimbingan`, `persentase_sidang`, `persentase_bimbingan`, `persentase_progress`) VALUES
+(18, '14', 'Proyek I', NULL, '3217061702990004', 1, '2017/2018', '2019-10-01', '2019-10-09', '1', 10, 0, 0, 0),
+(19, '14', 'Proyek II', NULL, '3217061702990005', 0, '2017/2018', '2019-10-01', '2019-10-09', '2', 22, 11, 0, 0),
+(20, '13', 'Coba', NULL, '3217061702990001', 1, '2017/2018', '2019-10-09', '2019-10-24', '4', 10, 0, 0, 0),
+(21, '14', 'qfqwf', NULL, '3217061702990005', 0, '2', '2019-10-17', '2019-10-31', '1', 8, 43, 57, 0),
+(22, '13', 'proyekyej', NULL, '3217061702990001', 1, '2', '2019-10-29', '2019-10-29', '1', 9, 80, 20, 0),
+(26, '14', 'saf', NULL, '3217061702990004', 1, '2', '0000-00-00', '0000-00-00', '1', 8, 50, 50, 0),
+(27, '13', 'asfsa', NULL, '3217061702990001', 1, '2', '1970-01-23', '1970-01-15', '1', 8, 50, 50, 0),
+(28, '13', 'Proyek Coba', NULL, '3217061702990002', 0, '2017/2018', '2019-11-09', '2019-11-22', '2', 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kegiatan_progress`
+--
+
+CREATE TABLE `kegiatan_progress` (
+  `id_progress` int(11) NOT NULL,
+  `judul_progress` varchar(55) NOT NULL,
+  `id_kegiatan` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kegiatan_progress`
+--
+
+INSERT INTO `kegiatan_progress` (`id_progress`, `judul_progress`, `id_kegiatan`) VALUES
+(1, 'afsafa', 19),
+(2, 'aazvsaf', 19),
+(3, 'aazvsafwwq', 19),
+(4, '1', 19),
+(6, 'CC', 18),
+(7, 'aaa', 18);
 
 -- --------------------------------------------------------
 
@@ -223,7 +274,7 @@ INSERT INTO `mahasiswa` (`npm`, `nama`, `alamat`, `angkatan`, `tempat_lahir`, `t
 ('1173002', 'Anak Tiga De', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173003', 'Tiga De Anak', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173004', 'Tiga Anak De', NULL, '2017/2018', NULL, NULL, 13, 1),
-('1173005', 'Anak De Tiga', NULL, '2017/2018', NULL, NULL, 13, 1),
+('1173005', 'Anak De Tiga', '', '2017/2018', '', '0000-00-00', 13, 3),
 ('1173006', 'Anak Tiga De', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173007', 'Tiga De Anak', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173008', 'Tiga Anak De', NULL, '2017/2018', NULL, NULL, 13, 1),
@@ -278,7 +329,7 @@ INSERT INTO `mahasiswa` (`npm`, `nama`, `alamat`, `angkatan`, `tempat_lahir`, `t
 ('1173057', 'Anak De Tiga', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173058', 'Anak Tiga De', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173059', 'Tiga De Anak', NULL, '2017/2018', NULL, NULL, 13, 1),
-('1173060', 'Tiga Anak De', NULL, '2017/2018', NULL, NULL, 13, 1),
+('1173060', 'Tiga Anak De', '', '2017/2018', '', '0000-00-00', 13, 4),
 ('1173061', 'Anak De Tiga', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173062', 'Anak Tiga De', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173063', 'Tiga De Anak', NULL, '2017/2018', NULL, NULL, 13, 1),
@@ -295,7 +346,7 @@ INSERT INTO `mahasiswa` (`npm`, `nama`, `alamat`, `angkatan`, `tempat_lahir`, `t
 ('1173074', 'Anak Tiga De', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173075', 'Tiga De Anak', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173076', 'Tiga Anak De', NULL, '2017/2018', NULL, NULL, 13, 1),
-('1173077', 'Anak De Tiga', NULL, '2017/2018', NULL, NULL, 13, 1),
+('1173077', 'Anak De Tiga', '', '2017/2018', '', '0000-00-00', 13, 1),
 ('1173078', 'Anak Tiga De', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173079', 'Tiga De Anak', NULL, '2017/2018', NULL, NULL, 13, 1),
 ('1173080', 'Tiga Anak De', NULL, '2017/2018', NULL, NULL, 13, 1),
@@ -359,20 +410,47 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notifikasi`
+--
+
+CREATE TABLE `notifikasi` (
+  `id_notifikasi` int(50) NOT NULL,
+  `pesan` varchar(50) NOT NULL,
+  `tema_notifikasi` varchar(20) NOT NULL,
+  `target` varchar(20) NOT NULL,
+  `status_pesan` int(1) NOT NULL,
+  `status_notifikasi` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `obyek_penelitian`
+--
+
+CREATE TABLE `obyek_penelitian` (
+  `id_penelitian` int(4) NOT NULL,
+  `nama_penelitian` varchar(150) NOT NULL,
+  `id_prodi` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `prodi`
 --
 
 CREATE TABLE `prodi` (
   `id_prodi` char(2) NOT NULL,
   `nama_prodi` varchar(80) NOT NULL,
-  `semester` int(2) DEFAULT NULL
+  `total_semester` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `prodi`
 --
 
-INSERT INTO `prodi` (`id_prodi`, `nama_prodi`, `semester`) VALUES
+INSERT INTO `prodi` (`id_prodi`, `nama_prodi`, `total_semester`) VALUES
 ('13', 'D-III Teknik Informatika', 6),
 ('14', 'D-IV Teknik Informatika', 8);
 
@@ -416,8 +494,9 @@ INSERT INTO `proyek` (`id_proyek`, `judul_proyek`, `abstrak`, `keyword_abstrak`,
 (6, 'wefwef', 'wegwewf', NULL, 'gwewgfew', 'wegweg', 'wwegewgwe', NULL, 18, '3217061702990005', '3217061702990006', '2019-10-11', NULL, NULL, NULL, '102', '1174004', 3, NULL, ''),
 (7, 'qwflknqhwoifqw', 'qwqoefweoif', NULL, 'qoweifweoif', 'oiwehfoiwejf', 'wefeoiwfwoie', NULL, 18, '3217061702990007', '3217061702990004', '2019-10-10', NULL, NULL, NULL, '111', '1174009', 2, '1174005', ''),
 (8, 'wegwe', 'weew', NULL, 'wegweg', 'wegweg', 'wegewg', NULL, 18, '3217061702990004', NULL, NULL, NULL, NULL, NULL, NULL, '1174006', 2, '1174008', 'asfsaf'),
-(9, 'asfsaf', 'qwfqwf', 'qqqasa', 'fqfqwf', 'qwfqww', 'qfqwf', 'qwfwqf', 20, '3217061702990001', NULL, NULL, NULL, NULL, NULL, NULL, '1173010', 2, '1173002', 'cucok'),
-(10, 'blabla', 'wdugawduka', 'hah,asda,asda,asaasd', '1wwddwad', 'sadasda', 'asdaada', '', 22, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1173090', 1, '1173004', '');
+(9, 'asfsaf', 'qwfqwf', 'qqqasa', 'fqfqwf', 'qwfqww', 'qfqwf', 'qwfwqf', 20, '3217061702990001', NULL, NULL, NULL, NULL, NULL, NULL, '1173010', 0, NULL, 'cucok'),
+(10, 'blabla', 'wdugawduka', 'hah,asda,asda,asaasd', '1wwddwad', 'sadasda', 'asdaada', '', 22, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1173090', 0, NULL, ''),
+(11, 'wqfwqf', 'wqfwqfw', 'qwfqwf', 'wfqwfq', 'wqfqfqw', 'qwfqwf', 'qwfqwfwq', 27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1173017', 1, '1173002', '');
 
 -- --------------------------------------------------------
 
@@ -557,6 +636,7 @@ INSERT INTO `user` (`id_user`, `pass`, `jabatan`) VALUES
 ('1174009', '1174009', 'M'),
 ('1174010', '1174010', 'M'),
 ('3217061702990001', '3217061702990001', 'D'),
+('3217061702990002', '3217061702990002', 'D'),
 ('3217061702990004', '3217061702990004', 'D'),
 ('3217061702990005', '3217061702990005', 'D'),
 ('3217061702990006', '3217061702990006', 'D'),
@@ -582,6 +662,12 @@ ALTER TABLE `bimbingan`
   ADD KEY `key_proyek` (`id_proyek`);
 
 --
+-- Indexes for table `bimbingan_progress`
+--
+ALTER TABLE `bimbingan_progress`
+  ADD PRIMARY KEY (`id_bimbingan_progress`);
+
+--
 -- Indexes for table `dosen`
 --
 ALTER TABLE `dosen`
@@ -594,10 +680,28 @@ ALTER TABLE `kegiatan`
   ADD PRIMARY KEY (`id_kegiatan`);
 
 --
+-- Indexes for table `kegiatan_progress`
+--
+ALTER TABLE `kegiatan_progress`
+  ADD PRIMARY KEY (`id_progress`);
+
+--
 -- Indexes for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`npm`);
+
+--
+-- Indexes for table `notifikasi`
+--
+ALTER TABLE `notifikasi`
+  ADD PRIMARY KEY (`id_notifikasi`);
+
+--
+-- Indexes for table `obyek_penelitian`
+--
+ALTER TABLE `obyek_penelitian`
+  ADD PRIMARY KEY (`id_penelitian`);
 
 --
 -- Indexes for table `prodi`
@@ -629,19 +733,43 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bimbingan`
 --
 ALTER TABLE `bimbingan`
-  MODIFY `id_bimbingan` int(24) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_bimbingan` int(24) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT for table `bimbingan_progress`
+--
+ALTER TABLE `bimbingan_progress`
+  MODIFY `id_bimbingan_progress` int(36) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id_kegiatan` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_kegiatan` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `kegiatan_progress`
+--
+ALTER TABLE `kegiatan_progress`
+  MODIFY `id_progress` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `notifikasi`
+--
+ALTER TABLE `notifikasi`
+  MODIFY `id_notifikasi` int(50) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `obyek_penelitian`
+--
+ALTER TABLE `obyek_penelitian`
+  MODIFY `id_penelitian` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `proyek`
 --
 ALTER TABLE `proyek`
-  MODIFY `id_proyek` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_proyek` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

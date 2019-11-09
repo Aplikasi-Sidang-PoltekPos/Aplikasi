@@ -19,7 +19,7 @@ function load_progress(){
             $('#list-progress').empty();
             $.each(res.data_progress.data, function(index, value){
                 var content = html;
-                content = content.replace('ISIKONTEN', value.nama_progress);
+                content = content.replace('ISIKONTEN', value.judul_progress);
                 $('#list-progress').append(content);
             });
             //$('#list-progress').append(html);
@@ -47,7 +47,7 @@ $(function(){
     $('#tambah-progress').on('click', function(){
         var fd = new FormData();
         var isi = $('#judul-progress').val();
-        fd.append('nama_progress', isi);
+        fd.append('judul_progress', isi);
         fd.append('condition', 'insert');
         modify_progress(fd);
     });

@@ -35,16 +35,6 @@ class M_mahasiswa extends CI_Model{
 		}
 	}
 
-  	public function update($data){
-		$this->db->where('npm', $data['npm']);
-		$isi = $this->db->update('mahasiswa', $data);
-    	if($isi){
-			return array('status'=>'1');
-		}else{
-			return array('status'=>'0', 'message'=>$this->db->error());
-		}
-	}
-
   public function getAngkatan(){
     $this->db->distinct();
     $this->db->select("angkatan");

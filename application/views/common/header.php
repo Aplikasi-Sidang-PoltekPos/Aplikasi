@@ -37,7 +37,9 @@
   <link rel="stylesheet" href="<?=base_url('assets/theme/')?>plugins/datatables/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="<?=base_url('assets/theme/')?>plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="<?=base_url('assets/theme/')?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="<?=base_url('assets/libraries/css-progress-wizard/')?>css/progress-wizard.min.css">
   <style>
+    /* Menghilangkan Slider untuk number*/
     input[type=number]::webkit-inner-spin-button,
     input[type=number]::webkit-outer-spin-button{
       -webkit-appearance: none;
@@ -46,6 +48,8 @@
     input[type=number] {
       -moz-appearance:textfield; /* Firefox */
     }
+
+
   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
