@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2019 at 04:41 PM
+-- Generation Time: Nov 13, 2019 at 03:22 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -74,59 +74,8 @@ CREATE TABLE `bimbingan` (
   `status_bimbingan` int(1) NOT NULL,
   `id_proyek` int(16) NOT NULL,
   `nilai_bimbingan` int(100) NOT NULL DEFAULT '0',
-  `id_progress` int(11) NOT NULL
+  `id_kegiatan_progress` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `bimbingan`
---
-
-INSERT INTO `bimbingan` (`id_bimbingan`, `tgl_bimbingan`, `keterangan`, `catatan`, `status_bimbingan`, `id_proyek`, `nilai_bimbingan`, `id_progress`) VALUES
-(1, '2019-10-03', 'qwfqqfw', '', 1, 3, 0, 0),
-(2, '2019-10-04', 'qwfqqfwa', '', 1, 3, 0, 0),
-(3, '2019-10-05', 'qwfqqfwa', '', 1, 3, 0, 0),
-(4, '2019-10-06', 'qwfqqfwa', '', 1, 3, 0, 0),
-(5, '2019-10-07', 'qwfqqfwa', '', 1, 3, 0, 0),
-(6, '2019-10-08', 'qwfqqfwa', '', 1, 3, 0, 0),
-(7, '2019-10-09', 'qwfqqfwa', '', 1, 3, 0, 0),
-(8, '2019-10-10', 'qwfqqfwa', '', 1, 3, 0, 0),
-(9, '2019-10-03', 'iewfoiwe', '', 1, 5, 0, 0),
-(10, '2019-10-07', 'asfasfas', '', 1, 7, 0, 0),
-(11, '2019-10-08', 'asfasfasasfsafsa', '', 1, 7, 0, 0),
-(12, '2019-10-11', 'wefwef', '', 1, 7, 0, 0),
-(13, '2019-10-12', 'wgwegwegweweg', '', 1, 7, 0, 0),
-(14, '2019-10-13', 'wgwegwegwewwegwegweeg', '', 1, 7, 0, 0),
-(15, '2019-10-14', 'wgwegwegwwegwegewgwewwegwegweega', '', 1, 7, 0, 0),
-(16, '2019-10-15', 'wgwegwegwwegwegewgwewwegwegweega', '', 1, 7, 0, 0),
-(17, '2019-10-16', 'wgwegwegwwegwegewgwewwegwegweega', '', 1, 7, 0, 0),
-(18, '2019-10-10', 'awfaw', '', 1, 4, 0, 0),
-(19, '2019-10-11', 'awfaw', '', 1, 4, 0, 0),
-(20, '2019-10-12', 'awfaw', '', 1, 4, 0, 0),
-(21, '2019-10-14', 'awfaw', '', 1, 4, 0, 0),
-(22, '2019-10-15', 'awfaw', '', 1, 4, 0, 0),
-(23, '2019-10-16', 'awfaw', '', 1, 4, 0, 0),
-(24, '2019-10-17', 'awfaw', '', 1, 4, 0, 0),
-(25, '2019-10-18', 'awfaw', '', 1, 4, 0, 0),
-(26, '2019-10-10', 'ugvtyvty', 'qwfwqfqw', 1, 6, 0, 0),
-(27, '2019-10-15', 'hahahaha', 'oqeufuqeq', 1, 6, 0, 0),
-(28, '2019-10-24', 'protyekkfcakepoojd', '', 1, 6, 0, 0),
-(29, '2019-10-31', 'geloood', '', 1, 6, 0, 0),
-(30, '2019-11-06', 'geloood wkwk', '', 1, 6, 0, 0),
-(31, '2019-11-13', 'GELUD TEROOOS', '', 1, 6, 0, 0),
-(32, '2019-11-14', 'GELUD TEROOOS', '', 1, 6, 0, 0),
-(33, '2019-11-15', 'GELUD TEROOOS', '', 1, 6, 0, 0),
-(34, '2019-11-05', 'wddwaadwa', 'gud dgud', 1, 9, 100, 0),
-(35, '2019-10-15', 'asfsaf', '', 0, 7, 0, 0),
-(36, '2019-10-16', 'coba doang', '', 0, 7, 0, 0),
-(37, '2019-11-06', 'hntjutjutju', '', 0, 3, 0, 0),
-(38, '2019-11-08', 'faf', '', 0, 5, 0, 0),
-(39, '2019-11-08', 'faf', '', 0, 5, 0, 0),
-(40, '2019-11-08', 'fafaa', '', 0, 5, 0, 0),
-(41, '2019-11-08', 'fafaaafsa', '', 0, 5, 0, 0),
-(42, '2019-11-08', 'qfqfwqfq', '', 0, 5, 0, 0),
-(43, '2019-11-08', 'qfqfwqfqaaa', '', 0, 5, 0, 0),
-(44, '2019-11-08', 'a', '', 0, 5, 0, 0),
-(45, '2019-11-08', 'biuiu', '', 0, 4, 0, 6);
 
 -- --------------------------------------------------------
 
@@ -231,7 +180,7 @@ INSERT INTO `kegiatan` (`id_kegiatan`, `prodi`, `nama_kegiatan`, `jenis_kegiatan
 --
 
 CREATE TABLE `kegiatan_progress` (
-  `id_progress` int(11) NOT NULL,
+  `id_kegiatan_progress` int(11) NOT NULL,
   `judul_progress` varchar(55) NOT NULL,
   `id_kegiatan` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -240,7 +189,7 @@ CREATE TABLE `kegiatan_progress` (
 -- Dumping data for table `kegiatan_progress`
 --
 
-INSERT INTO `kegiatan_progress` (`id_progress`, `judul_progress`, `id_kegiatan`) VALUES
+INSERT INTO `kegiatan_progress` (`id_kegiatan_progress`, `judul_progress`, `id_kegiatan`) VALUES
 (1, 'afsafa', 19),
 (2, 'aazvsaf', 19),
 (3, 'aazvsafwwq', 19),
@@ -417,7 +366,7 @@ CREATE TABLE `notifikasi` (
   `id_notifikasi` int(50) NOT NULL,
   `pesan` varchar(50) NOT NULL,
   `tema_notifikasi` varchar(20) NOT NULL,
-  `target` varchar(20) NOT NULL,
+  `target` varchar(16) NOT NULL,
   `status_pesan` int(1) NOT NULL,
   `status_notifikasi` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -433,6 +382,13 @@ CREATE TABLE `obyek_penelitian` (
   `nama_penelitian` varchar(150) NOT NULL,
   `id_prodi` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `obyek_penelitian`
+--
+
+INSERT INTO `obyek_penelitian` (`id_penelitian`, `nama_penelitian`, `id_prodi`) VALUES
+(0, 'Gak Ada', 0);
 
 -- --------------------------------------------------------
 
@@ -468,7 +424,7 @@ CREATE TABLE `proyek` (
   `latar_belakang` text,
   `identifikasi_masalah` text,
   `daftar_pustaka` text,
-  `kategori_proyek` text,
+  `id_penelitian` int(4) DEFAULT NULL,
   `id_kegiatan` int(8) NOT NULL,
   `id_dosen_pembimbing` char(16) DEFAULT NULL,
   `id_dosen_penguji` char(16) DEFAULT NULL,
@@ -482,21 +438,6 @@ CREATE TABLE `proyek` (
   `npm_anggota` char(7) DEFAULT NULL,
   `alasan_approval` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `proyek`
---
-
-INSERT INTO `proyek` (`id_proyek`, `judul_proyek`, `abstrak`, `keyword_abstrak`, `latar_belakang`, `identifikasi_masalah`, `daftar_pustaka`, `kategori_proyek`, `id_kegiatan`, `id_dosen_pembimbing`, `id_dosen_penguji`, `tgl_sidang`, `tgl_sidang_ulang`, `nilai_pembimbing`, `nilai_penguji`, `ruangan`, `npm_ketua`, `status_proyek`, `npm_anggota`, `alasan_approval`) VALUES
-(3, 'qfasfsg', 'qwegweg', NULL, 'wegwe', 'wegew', 'wegew', NULL, 18, '3217061702990004', NULL, NULL, NULL, NULL, NULL, NULL, '1174001', 2, '1174007', ''),
-(4, 'qfwfqeefwef', 'weew', NULL, 'wefew', 'wegew', 'wegwegw', NULL, 18, '3217061702990004', '3217061702990007', '2019-10-31', NULL, NULL, NULL, '101', '1174002', 2, NULL, ''),
-(5, 'eqwfewgew', 'wegewg', NULL, 'gwegweg', 'wewgwegw', 'eqwgwegw', NULL, 18, '3217061702990004', NULL, NULL, NULL, NULL, NULL, NULL, '1174003', 2, NULL, ''),
-(6, 'wefwef', 'wegwewf', NULL, 'gwewgfew', 'wegweg', 'wwegewgwe', NULL, 18, '3217061702990005', '3217061702990006', '2019-10-11', NULL, NULL, NULL, '102', '1174004', 3, NULL, ''),
-(7, 'qwflknqhwoifqw', 'qwqoefweoif', NULL, 'qoweifweoif', 'oiwehfoiwejf', 'wefeoiwfwoie', NULL, 18, '3217061702990007', '3217061702990004', '2019-10-10', NULL, NULL, NULL, '111', '1174009', 2, '1174005', ''),
-(8, 'wegwe', 'weew', NULL, 'wegweg', 'wegweg', 'wegewg', NULL, 18, '3217061702990004', NULL, NULL, NULL, NULL, NULL, NULL, '1174006', 2, '1174008', 'asfsaf'),
-(9, 'asfsaf', 'qwfqwf', 'qqqasa', 'fqfqwf', 'qwfqww', 'qfqwf', 'qwfwqf', 20, '3217061702990001', NULL, NULL, NULL, NULL, NULL, NULL, '1173010', 0, NULL, 'cucok'),
-(10, 'blabla', 'wdugawduka', 'hah,asda,asda,asaasd', '1wwddwad', 'sadasda', 'asdaada', '', 22, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1173090', 0, NULL, ''),
-(11, 'wqfwqf', 'wqfwqfw', 'qwfqwf', 'wfqwfq', 'wqfqfqw', 'qwfqwf', 'qwfqwfwq', 27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1173017', 1, '1173002', '');
 
 -- --------------------------------------------------------
 
@@ -659,13 +600,15 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `bimbingan`
   ADD PRIMARY KEY (`id_bimbingan`),
+  ADD KEY `key_progress_tema` (`id_kegiatan_progress`),
   ADD KEY `key_proyek` (`id_proyek`);
 
 --
 -- Indexes for table `bimbingan_progress`
 --
 ALTER TABLE `bimbingan_progress`
-  ADD PRIMARY KEY (`id_bimbingan_progress`);
+  ADD PRIMARY KEY (`id_bimbingan_progress`),
+  ADD KEY `key_progress` (`id_bimbingan`);
 
 --
 -- Indexes for table `dosen`
@@ -683,7 +626,8 @@ ALTER TABLE `kegiatan`
 -- Indexes for table `kegiatan_progress`
 --
 ALTER TABLE `kegiatan_progress`
-  ADD PRIMARY KEY (`id_progress`);
+  ADD PRIMARY KEY (`id_kegiatan_progress`),
+  ADD KEY `key_kegiatan_progress` (`id_kegiatan`);
 
 --
 -- Indexes for table `mahasiswa`
@@ -695,7 +639,8 @@ ALTER TABLE `mahasiswa`
 -- Indexes for table `notifikasi`
 --
 ALTER TABLE `notifikasi`
-  ADD PRIMARY KEY (`id_notifikasi`);
+  ADD PRIMARY KEY (`id_notifikasi`),
+  ADD KEY `user_target` (`target`);
 
 --
 -- Indexes for table `obyek_penelitian`
@@ -717,7 +662,8 @@ ALTER TABLE `proyek`
   ADD KEY `key_dosen_penguji` (`id_dosen_penguji`),
   ADD KEY `key_dosen_pembimbing` (`id_dosen_pembimbing`),
   ADD KEY `key_kegiatan` (`id_kegiatan`),
-  ADD KEY `key_mhs` (`npm_ketua`);
+  ADD KEY `key_mhs` (`npm_ketua`),
+  ADD KEY `key_penelitian` (`id_penelitian`);
 
 --
 -- Indexes for table `user`
@@ -733,7 +679,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bimbingan`
 --
 ALTER TABLE `bimbingan`
-  MODIFY `id_bimbingan` int(24) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_bimbingan` int(24) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `bimbingan_progress`
@@ -751,7 +697,7 @@ ALTER TABLE `kegiatan`
 -- AUTO_INCREMENT for table `kegiatan_progress`
 --
 ALTER TABLE `kegiatan_progress`
-  MODIFY `id_progress` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kegiatan_progress` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `notifikasi`
@@ -769,7 +715,7 @@ ALTER TABLE `obyek_penelitian`
 -- AUTO_INCREMENT for table `proyek`
 --
 ALTER TABLE `proyek`
-  MODIFY `id_proyek` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_proyek` int(16) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -779,7 +725,26 @@ ALTER TABLE `proyek`
 -- Constraints for table `bimbingan`
 --
 ALTER TABLE `bimbingan`
-  ADD CONSTRAINT `key_proyek` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `key_progress_tema` FOREIGN KEY (`id_kegiatan_progress`) REFERENCES `kegiatan_progress` (`id_kegiatan_progress`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `key_proyek` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `bimbingan_progress`
+--
+ALTER TABLE `bimbingan_progress`
+  ADD CONSTRAINT `key_progress` FOREIGN KEY (`id_bimbingan`) REFERENCES `bimbingan` (`id_bimbingan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `kegiatan_progress`
+--
+ALTER TABLE `kegiatan_progress`
+  ADD CONSTRAINT `key_kegiatan_progress` FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan` (`id_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `notifikasi`
+--
+ALTER TABLE `notifikasi`
+  ADD CONSTRAINT `user_target` FOREIGN KEY (`target`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `proyek`
@@ -788,7 +753,8 @@ ALTER TABLE `proyek`
   ADD CONSTRAINT `key_dosen_pembimbing` FOREIGN KEY (`id_dosen_pembimbing`) REFERENCES `dosen` (`nik`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `key_dosen_penguji` FOREIGN KEY (`id_dosen_penguji`) REFERENCES `dosen` (`nik`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `key_kegiatan` FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan` (`id_kegiatan`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `key_mhs` FOREIGN KEY (`npm_ketua`) REFERENCES `mahasiswa` (`npm`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `key_mhs` FOREIGN KEY (`npm_ketua`) REFERENCES `mahasiswa` (`npm`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `key_penelitian` FOREIGN KEY (`id_penelitian`) REFERENCES `obyek_penelitian` (`id_penelitian`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
