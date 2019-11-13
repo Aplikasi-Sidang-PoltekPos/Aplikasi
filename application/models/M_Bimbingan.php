@@ -52,6 +52,7 @@ class M_Bimbingan extends CI_Model {
     return $this->db->get()->row_array();
   }
 
+
   public function update($data, $where)
 	{
 		$this->db->where($where);

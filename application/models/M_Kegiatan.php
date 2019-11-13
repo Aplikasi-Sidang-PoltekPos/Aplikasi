@@ -47,4 +47,16 @@ class M_Kegiatan extends CI_Model {
       return array('status'=>'0', 'message'=>$this->db->error());
     }
   }
+
+  public function get_obyek_penelitian($where){
+    $this->db->select('*');
+    $this->db->from('obyek_penelitian');
+    $this->db->where($where);
+    $isi = $this->db->get();
+    if($isi){
+      return array('status'=>'1','isi'=>$isi);
+    }else{
+      return array('status'=>'0', 'message'=>$this->db->error());
+    }
+  }
 }

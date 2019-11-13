@@ -87,6 +87,15 @@ class Admin extends CI_Controller {
 				$isi['status_mulai']="1";
 				echo $this->Ubah_Data($isi, $data, 'kegiatan');
 			break;
+			case "InsertObyek":
+				$data = $this->input->post();
+				$data['id_prodi'] = $_SESSION['prodi'];
+				echo $this->Tambah_Data($data, 'obyekpenelitian');
+			break;
+			case "TampilObyek":
+				$search=array('id_prodi'=>$_SESSION['prodi']);
+				echo $this->Tampil_Data('obyekpenelitian', '', $search);
+			break;
 		}
 
 	}
@@ -115,18 +124,19 @@ class Admin extends CI_Controller {
 	}
 
 	public function Tambah_Data($data, $table){
-		$query = "";
 		switch($table){
 			case "dosen":
-				$query = $this->M_Default->insert($data, 'dosen');
 				$notification['message']="Dosen berhasil ditambahkan";
 			break;
 			case "kegiatan" :
-				$query = $this->M_Kegiatan->insert($data, 'kegiatan');
 				$notification['message']="Kegiatan berhasil ditambahkan";
 			break;
+			case "obyekpenelitian":
+				$table="obyek_penelitian";
+				$notification['message']="Obyek Penelitian Berhasil Ditambahkan";
+			break;
 		}
-
+		$query = $this->M_Default->insert($data, $table);
 		if($query['status']=='1'){
 			$notification['status'] = "success";
 			if(!isset($notification['message'])){
@@ -194,6 +204,7 @@ class Admin extends CI_Controller {
 			case "mahasiswa": $db_call = $this->M_Mahasiswa->get_mahasiswa($query_extras); break;
 			case "dosen": $db_call = $this->M_Dosen->get_dosen($query_extras); break;
 			case "kegiatan": $db_call = $this->M_Kegiatan->get_kegiatan($query_extras); break;
+			case "obyekpenelitian": $db_call = $this->M_Kegiatan->get_obyek_penelitian($query_extras); break;
 		}
 		if($db_call['status']=='1'){
 			$data['data'] = $db_call['isi']->result();

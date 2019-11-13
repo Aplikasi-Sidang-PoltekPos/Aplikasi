@@ -175,6 +175,10 @@ class Mahasiswa extends CI_Controller {
 				$data['status_proyek']="0";
 				echo $this->Tambah_Data($data, 'detail');
 			break;
+			case "TampilObyek":
+				$search=array('id_prodi'=>$_SESSION['prodi']);
+				echo $this->Tampil_Data('obyekpenelitian', '', $search);
+			break;
 		}
 	}
 
@@ -213,7 +217,8 @@ class Mahasiswa extends CI_Controller {
 			case "detail": $db_call = $this->M_Proyek->get_proyek($query_extras); break;
 			case "bimbingan": $db_call = $this->M_Bimbingan->get_bimbingan($query_extras); break;
 			case "anggota": $db_call = $this->M_Mahasiswa->get_mahasiswa($query_extras); break;
-			case "progress": $db_call = $this->M_Kegiatan->get_kegiatan_progress($query_extras);
+			case "progress": $db_call = $this->M_Kegiatan->get_kegiatan_progress($query_extras); break;
+			case "obyekpenelitian": $db_call = $this->M_Kegiatan->get_obyek_penelitian($query_extras); break;
 		}
 
 		if($db_call['status']=='1'){

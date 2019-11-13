@@ -54,10 +54,11 @@ function form_data(form_id){
   });
   return fd;
 }
+$(".select2").select2({
+  theme:"bootstrap"
+});
 $(function(){
-  $(".select2").select2({
-    theme:"bootstrap"
-  });
+  
   $('[data-mask]').inputmask();
   $('.timemask').inputmask('23:59', {
     definitions:{

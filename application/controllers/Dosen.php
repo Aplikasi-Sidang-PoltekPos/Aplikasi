@@ -81,10 +81,10 @@ class Dosen extends CI_Controller {
 			case "":
 				$data['nav_active'] = "setting_proyek";
 				$data['nav_open'] = "koordinator";
-				$data['jscallurl']="dosen/dosen_setting_proyek.js";
+				$data['jscallurl']="dosen/koor_setting_proyek.js";
 				
 				$data = array_merge($data, $this->con_config);
-				$this->load->view('dosen/dosen_setting_proyek',$data);
+				$this->load->view('koordinator/koor_setting_proyek',$data);
 			break;
 			case "Data":
 				$search[0]['type']="where";

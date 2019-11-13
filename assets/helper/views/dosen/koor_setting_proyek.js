@@ -9,7 +9,7 @@ function load_progress(){
           var res = JSON.parse(response);
           text_setter(res.data_kegiatan.data, 'form');
             var html = "<li>";
-            html += '<span class="text">ISIKONTEN</span>';
+            html += '<span class="text"><data></data>ISIKONTEN</span>';
             html += '<small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>'
             html += '<div class="tools">';
             html += '<i class="fas fa-edit"></i>';

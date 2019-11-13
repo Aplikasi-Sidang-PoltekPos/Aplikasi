@@ -1,4 +1,5 @@
 var timer;
+
 $(function(){
   setContentView();
   var configall = "";
@@ -31,6 +32,23 @@ $(function(){
       }, 5000);    
     }
   }
+  function load_obyek_penelitian(){
+    $('#obyek_penelitian').empty();
+    $.ajax({
+      url:base_url("Mahasiswa/Proyek/TampilObyek"),
+      type:'get',
+      contentType: false,
+      processData: false,
+      success: function(response){
+        var res = JSON.parse(response);
+        $.each(res.data, function(index, value){
+          var tags = $('#obyek_penelitian');
+          tags.append('<option value="'+value.id_penelitian+'">'+value.nama_penelitian+'</option>')
+        });
+      }
+    });
+  }
+  
   function template_event(view){
     if(view=="detail"){
       $('#modal-pilih-anggota').on('click', '#save', function(){
@@ -94,6 +112,7 @@ $(function(){
             });
         });
     }else if(view=="kegiatan"){
+      load_obyek_penelitian();
       var kegiatan_table = $('#data-kegiatan').DataTable({
         "ajax": {
           "type":"POST",
@@ -199,7 +218,7 @@ function refreshComboAnggota(){
         }
       }
     });
-    $("#npm_anggota").select2(
+    $("#npm_anggota, #obyek_penelitian").select2(
       {
         theme:"bootstrap"
       }

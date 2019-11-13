@@ -61,10 +61,27 @@
           </div>
           <!-- /.col -->
         </div>
-        <!-- /.row -->
-
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="header">Obyek Penelitian</h3>
+              </div>
+              <div class="card-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-sm" id="nama-penelitian">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary btn-sm" type="button" id="tambah-obyek">Tambah</button>
+                        </div>
+                    </div>
+                    <ul class="todo-list" data-widget="todo-list" id="list-penelitian">
+                        
+                    </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- /.content -->
   </div>

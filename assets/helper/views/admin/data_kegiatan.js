@@ -70,6 +70,7 @@ $(function(){
     });
   });
 
+  
   $("#save").click(function(){
     var fd = form_data('form-kegiatan');
 
@@ -89,24 +90,51 @@ $(function(){
       }
     });
   });
-
-  $("#delete").click(function(){
-    Swal.fire('Success', 'Data Deleted', 'success');
+  $('#tambah-obyek').on('click', function(){
+    var fd = new FormData();
+    fd.append('nama_penelitian', $('#nama-penelitian').val());
+    $.ajax({
+      url:base_url("Admin/Kegiatan/InsertObyek"),
+      type:'post',
+      data:fd,
+      contentType: false,
+      processData: false,
+      success: function(response){
+        alert_toast(response);
+        if(JSON.parse(response).status=="success"){
+          load_obyek_penelitian();
+          $('#nama-penelitian').val("");
+        }
+      }
+    });
   });
-
-  
-  
 });
-
-function hitung_persentase(changed){
-  var sidang = $('#persentase_sidang');
-  var bimbing = $('#persentase_bimbingan');
-  if(sidang.val()+bimbing.val()>100){
-    switch(changed){
-      case "bimbing": sidang.val(100-bimbing.val()); break;
-      case "sidang": bimbing.val(100-sidang.val()); break;
+load_obyek_penelitian();
+function load_obyek_penelitian(){
+  $.ajax({
+    url:base_url("Admin/Kegiatan/TampilObyek"),
+    type:'get',
+    contentType: false,
+    processData: false,
+    success: function(response){
+      var res = JSON.parse(response);
+        var html = "<li>";
+        html += '<span class="text"><data></data>ISIKONTEN</span>';
+        html += '<small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>'
+        html += '<div class="tools">';
+        html += '<i class="fas fa-edit"></i>';
+        html += '<i class="fas fa-trash-alt"></i>';
+        html += '</div>';
+        html += '</li>';
+        $('#list-penelitian').empty();
+        $.each(res.data, function(index, value){
+            var content = html;
+            content = content.replace('ISIKONTEN', value.nama_penelitian);
+            $('#list-penelitian').append(content);
+        });
+        //$('#list-progress').append(html);
     }
-  }
+  });
 }
 
 function mulai_kegiatan(data){
