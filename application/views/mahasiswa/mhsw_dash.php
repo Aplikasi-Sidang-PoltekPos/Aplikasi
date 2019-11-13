@@ -4,20 +4,17 @@
 
     <section class="content-header" id="#heading">
       <div class="container-fluid">
-        <div class="card">
-          <div class="card-body justify-content-center">
-            <ul class="progress-indicator">
-              <li class="completed"> <span class="bubble"></span> Step 1. </li>
-              <li class="completed"> <span class="bubble"></span> Step 2. </li>
-              <li> <span class="bubble"></span> Step 3. </li>
-              <li> <span class="bubble"></span> Step 4. </li>
-              <li> <span class="bubble"></span> Step 5. </li>
-            </ul>
+            <div id="smartwizard">
+              <ul>
+                  <li><a href=""><i class="fa fa-user-friends"></i><br /><small>Pengajuan Anggota</small></a></li>
+                  <li><a href=""><i class="fa fa-file-upload"></i><br /><small>Pengajuan Proposal</small></a></li>
+                  <li><a href=""><i class="fa fa-chalkboard-teacher"></i><br /><small>Progress Bimbingan</small></a></li>
+                  <li><a href=""><i class="fa fa-gavel"></i><br /><small>Sidang</small></a></li>
+              </ul>
           </div>
-        </div>
       </div>
       <?php if($status=="anggota"){ ?>
-      <div class="container-fluid" >
+      <div class="container-fluid">
         <div class="alert alert-info alert-dismissible">
           <button type="button" class="close"  aria-hidden="true">&times;</button>
           <h5><i class="icon fas fa-info"></i> Info!</h5>

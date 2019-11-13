@@ -83,6 +83,14 @@ class Mahasiswa extends CI_Controller {
 		}
 	}
 
+	public function CekProgress(){
+		$progress = null;
+		if(isset($_SESSION['status_proyek'])){
+			$progress = $_SESSION['status_proyek'];
+		}
+		echo $progress;
+	}
+
 	public function Proyek($a="")
 	{
 		if(isset($_SESSION['status_anggota'])){

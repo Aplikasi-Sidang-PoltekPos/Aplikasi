@@ -52,15 +52,6 @@ class M_Bimbingan extends CI_Model {
     return $this->db->get()->row_array();
   }
 
-  public function insert($data){
-    $query = $this->db->insert('bimbingan', $data);
-    if($query){
-      return array('status'=>'1','isi'=>$query);
-    }else{
-      return array('status'=>'0', 'message'=>$this->db->error());
-    }
-  }
-
   public function update($data, $where)
 	{
 		$this->db->where($where);

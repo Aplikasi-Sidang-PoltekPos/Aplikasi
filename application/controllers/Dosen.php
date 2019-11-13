@@ -277,23 +277,23 @@ class Dosen extends CI_Controller {
 		switch($table){
 			//case "dosen": $query = $this->M_Dosen->insert_dosen($data); break;
 			case "proyek" :
-				$query = $this->M_Default->update($data, $where, 'proyek');
+				$table = "proyek";
 				$notification['message'] = "Proyek Berhasil Di Approve";
 			break;
 			case "bimbingan":
-				$query = $this->M_Default->update($data, $where, 'bimbingan');
+				$table = "bimbingan";
 				$notification['message'] = "Bimbingan Berhasil Di Approve";
 			break;
 			case "profile":
-				$query = $this->M_Default->update($data, $where, 'dosen');
+				$table = "dosen";
 				$notification['message'] = "Dosen Berhasil diubah";
 			break;
 			case "kegiatan":
-				$query = $this->M_Default->update($data, $where, 'kegiatan');
+				$table = "kegiatan";
 				$notification['message'] = "Pengaturan berhasil Diperbaharui";
 			break;
 		}
-
+		$query = $this->M_Default->update($data, $where, $table);
 		if($query['status']=='1'){
 			$notification['status'] = "success";
 			if(!isset($notification['message'])){

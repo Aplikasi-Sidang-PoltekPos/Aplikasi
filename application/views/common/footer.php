@@ -52,6 +52,7 @@
 <script src="<?=base_url('assets/theme/')?>plugins/daterangepicker/daterangepicker.js"></script>
 <script src="<?=base_url('assets/theme/')?>plugins/inputmask/jquery.inputmask.bundle.js"></script>
 <script src="<?=base_url('assets/theme/')?>plugins/moment/moment.min.js"></script>
+<script src="<?=base_url('assets/libraries/SmartWizard/')?>/dist/js/jquery.smartWizard.min.js"></script>
 <script src="<?=base_url('assets/helper/main.js');?>"></script>
 <?php
   if(isset($jscallurl)){
