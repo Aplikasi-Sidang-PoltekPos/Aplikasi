@@ -61,13 +61,22 @@
                   </div>
                   <div class="form-group">
                     <label>Tema Pembahasan</label>
-                    <select class="form-control select2" style="width:100%;" name="id_progress" id="id_progress">
+                    <select class="form-control select2" style="width:100%;" name="id_kegiatan_progress" id="id_progress">
                     </select>
                   </div>
                   <div class="form-group">
                     <label>Keterangan</label>
-                    <textarea class="form-control" rows="3" placeholder="Pembahasan" name="keterangan"></textarea>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-sm" id="judul-progress">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary btn-sm" type="button" id="tambah-progress">Tambah</button>
+                        </div>
+                    </div>
+                    <ul class="todo-list" data-widget="todo-list" id="list-progress">
+                        
+                    </ul>
                   </div>
+                  
                 </div>
               </form>
             <div class="modal-footer justify-content-between">
