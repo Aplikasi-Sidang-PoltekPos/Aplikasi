@@ -8,8 +8,10 @@ var bimb_table = $('#data-bimbingan').DataTable({
     },
     "columns": [
       {"render":function(data, type, row, meta){return '';}, title:"#", "orderable":false},
-      {"data": "tgl_bimbingan", title:"Tanggal Bimbingan"},
-      {"data": "keterangan", title:"Pembahasan"},
+      {"data": "tgl_bimbingan", title:"Tanggal Bimbingan", width:"20%"},
+      {"render":function(data, type, row, meta){
+        return '<button class="btn btn-block btn-warning" id="cek-daftar-progress">Cek Daftar Progress</button>';
+      }, title:"Pembahasan"},
       {"render":
         function(data, type, row, meta){
             if(row.status_bimbingan=="0"){
@@ -43,7 +45,7 @@ setInterval(function(){
 }, 5000);
 load_progress_combo();
 function load_progress_combo(){
-    $("#id_progress").empty();
+    $("#id_kegiatan_progress").empty();
     $.ajax({
       url:base_url("Mahasiswa/Bimbingan/GetProgress"),
       type:'get',
@@ -52,20 +54,21 @@ function load_progress_combo(){
       success: function(response){
         var data = JSON.parse(response);
         if(data.data.length>0){
-          $("#id_progress").append('<option value = "" disabled selected>Pilih</option>');
+          $("#id_kegiatan_progress").append('<option value = "" disabled selected>Pilih</option>');
           $.each(data.data, function(i){
             var row = data.data[i];
-            $("#id_progress").append('<option value = "'+row.id_progress+'">'+row.judul_progress+'</option>');
+            $("#id_kegiatan_progress").append('<option value = "'+row.id_kegiatan_progress+'">'+row.judul_progress+'</option>');
           });
         }
       }
     });
-    $("#id_progress").select2(
-      {
-        theme:"bootstrap"
-      }
-    );
+    
 }
+$("#id_kegiatan_progress").select2(
+  {
+    theme:"bootstrap"
+  }
+);
 $(function(){
   $('#save').on('click', function(){
     var fd = form_data('form-bimbingan');
@@ -80,6 +83,7 @@ $(function(){
         if(JSON.parse(response).status=="success"){
           bimb_table.ajax.reload();
           $('#modal-bimbingan').modal('toggle');
+          insert_bimbingan_progress();
         }
       },error: function (xhr, ajaxOptions, thrownError) {
         alert(xhr.status);
@@ -88,4 +92,72 @@ $(function(){
       }
     });
   });
+  $('#tambah-bimbingan-progress').on('click', function(){
+    var html = "<li>";
+        html += '<span class="text">ISIKONTEN</span>';
+        html += '<div class="tools">';
+        html += '<i class="fas fa-trash-alt" id="hapus-progress"></i>';
+        html += '<i class="fas fa-search" id="coba-progress"></i>';
+        html += '</div>';
+        html += '</li>';
+        var progress = $('#judul-bimbingan-progress').val();
+        var content = html.replace('ISIKONTEN', progress);
+        $('#list-bimbingan-progress').append(content);
+  });
+  $('#list-bimbingan-progress').on('click', '#hapus-progress', function(){
+    $(this).closest('li').remove();
+    //$(this).closest('li').find('span').text();
+  });
 });
+$('.select2').select2({
+  'theme':bootstrap
+});
+function insert_bimbingan_progress(){
+  var data = [];
+  $('ul#list-bimbingan-progress span').each(function(){
+    data.push($(this).text());
+  });
+  var fd = new FormData();
+  fd.append('listprogress', JSON.stringify(data));
+  $.ajax({
+    url:base_url("Mahasiswa/Bimbingan/InsertProgressBimbingan"),
+    type:'post',
+    data:fd,
+    contentType: false,
+    processData: false,
+    success: function(response){
+      var res = JSON.parse(response);
+      alert_toast(response);
+      if(res.status=="success"){
+        
+      }
+      //$('#list-progress').append(html);
+    }
+  });
+}
+function load_bimbingan_progress(){
+  $.ajax({
+    url:base_url("Mahasiswa/Bimbingan/TampilProgress"),
+    type:'get',
+    contentType: false,
+    processData: false,
+    success: function(response){
+      var res = JSON.parse(response);
+        var html = "<li>";
+        html += '<span class="text"><data></data>ISIKONTEN</span>';
+        html += '<small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>'
+        html += '<div class="tools">';
+        html += '<i class="fas fa-edit"></i>';
+        html += '<i class="fas fa-trash-alt"></i>';
+        html += '</div>';
+        html += '</li>';
+        $('#list-bimbingan-progress').empty();
+        $.each(res.data, function(index, value){
+            var content = html;
+            content = content.replace('ISIKONTEN', value.judul_progress);
+            $('#list-bimbingan-progress').append(content);
+        });
+        //$('#list-progress').append(html);
+    }
+  });
+}

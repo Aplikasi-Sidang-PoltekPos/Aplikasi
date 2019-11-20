@@ -61,18 +61,18 @@
                   </div>
                   <div class="form-group">
                     <label>Tema Pembahasan</label>
-                    <select class="form-control select2" style="width:100%;" name="id_kegiatan_progress" id="id_progress">
+                    <select class="form-control select2" style="width:100%;" name="id_kegiatan_progress" id="id_kegiatan_progress">
                     </select>
                   </div>
                   <div class="form-group">
                     <label>Keterangan</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-sm" id="judul-progress">
+                        <input type="text" class="form-control form-control-sm" id="judul-bimbingan-progress">
                         <div class="input-group-prepend">
-                            <button class="btn btn-primary btn-sm" type="button" id="tambah-progress">Tambah</button>
+                            <button class="btn btn-primary btn-sm" type="button" id="tambah-bimbingan-progress">Tambah</button>
                         </div>
                     </div>
-                    <ul class="todo-list" data-widget="todo-list" id="list-progress">
+                    <ul class="todo-list" data-widget="todo-list" id="list-bimbingan-progress">
                         
                     </ul>
                   </div>

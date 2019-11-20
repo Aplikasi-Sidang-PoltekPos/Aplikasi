@@ -5,15 +5,27 @@
     <section class="content-header" id="#heading">
     
       <div class="container-fluid">
-            <div id="smartwizard">
-              <ul>
-              
-                  <li><a href=""><i class="fa fa-user-friends"></i><br /><large>Pengajuan Anggota</large></a></li>
-               
-                  <li><a href=""><i class="fa fa-file-upload"></i><br /><large>Pengajuan Proposal</large></a></li>
-                  <li><a href=""><i class="fa fa-chalkboard-teacher"></i><br /><large>Progress Bimbingan</large></a></li>
-                  <li><a href=""><i class="fa fa-gavel"></i><br /><large>Sidang</large></a></li>
-              </ul>
+          <div class="row">
+            <div class="col-md-12">
+              <div id="smartwizard">
+                <ul>
+                    <li><a href="" id="pengajuan-anggota-wizard"><i class="fa fa-user-friends"></i><br /><large>Pengajuan Anggota</large></a></li>
+                    <li><a href="" id="pengajuan-proposal-wizard"><i class="fa fa-file-upload"></i><br /><large>Pengajuan Proposal</large></a></li>
+                    <li><a href="" id="progress-bimbingan-wizard"><i class="fa fa-chalkboard-teacher"></i><br /><large>Progress Bimbingan</large></a></li>
+                    <li><a href="" id="sidang-wizard"><i class="fa fa-gavel"></i><br /><large>Sidang</large></a></li>
+                </ul>
+              </div>
+              <div id="wizardCat">
+                <div id="smartwizard2">
+                  <ul>
+                      <li><a href="" id="pengajuan-anggota-wizard"><i class="fa fa-user-friends"></i><br /><large>Pengajuan Anggota</large></a></li>
+                      <li><a href="" id="pengajuan-proposal-wizard"><i class="fa fa-file-upload"></i><br /><large>Pengajuan Proposal</large></a></li>
+                      <li><a href="" id="progress-bimbingan-wizard"><i class="fa fa-chalkboard-teacher"></i><br /><large>Progress Bimbingan</large></a></li>
+                      <li><a href="" id="sidang-wizard"><i class="fa fa-gavel"></i><br /><large>Sidang</large></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
       </div>
     
@@ -51,6 +63,3 @@
 
   	});
   </script>
-        
-
-      

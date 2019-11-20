@@ -40,6 +40,7 @@
   <!--<link rel="stylesheet" href="<?=base_url('assets/libraries/css-progress-wizard/')?>css/progress-wizard.min.css">-->
   <link rel="stylesheet" href="<?=base_url('assets/libraries/SmartWizard/')?>dist/css/smart_wizard.css">
   <link rel="stylesheet" href="<?=base_url('assets/libraries/SmartWizard/')?>dist/css/smart_wizard_theme_dots.css">
+  <link rel="stylesheet" href="<?=base_url('assets/libraries/SmartWizard/')?>dist/css/smart_wizard_theme_arrows.css">
   <style>
     /* Menghilangkan Slider untuk number*/
     input[type=number]::webkit-inner-spin-button,

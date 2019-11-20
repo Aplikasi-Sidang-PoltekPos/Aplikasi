@@ -19,6 +19,16 @@ $(function(){
 function setDashProgress(progress){
     $('#smartwizard').smartWizard({
         selected: progress,
+        theme: 'arrows',
+        autoAdjustHeight:true,
+        keyNavigation:false,
+        anchorSettings: {
+            anchorClickable: false,
+            enableAllAnchors: false
+        }
+    });
+    $('#smartwizard2').smartWizard({
+        selected: progress,
         theme: 'dots',
         autoAdjustHeight:true,
         keyNavigation:false,
@@ -26,5 +36,10 @@ function setDashProgress(progress){
             anchorClickable: false,
             enableAllAnchors: false
         }
+    });
+    $('#wizardCat').slideUp();
+    
+    $('#smartwizard .active').on('click', function(){
+        $('#wizardCat').slideToggle();
     });
 }

@@ -194,6 +194,10 @@ class Mahasiswa extends CI_Controller {
 				$query = $this->M_Default->insert($data, 'bimbingan');
 				$notification['message']="Bimbingan berhasil ditambahkan";
 			break;
+			case "bimbinganprogress":
+				$query = $this->M_Default->insert($data, 'bimbingan_progress');
+				$notification['message']="Bimbingan berhasil ditambahkan";
+			break;
 		}
 
 		if($query['status']=='1'){
@@ -257,6 +261,26 @@ class Mahasiswa extends CI_Controller {
 				case "GetProgress":
 					$search = array('id_kegiatan'=>$_SESSION['id_kegiatan']);
 					echo $this->Tampil_Data('progress','',$search);
+				break;
+				case "InsertProgressBimbingan":
+					$search[0]['type']="where";
+					$search[0]['value']=array('id_proyek'=>$_SESSION['id_proyek']);
+					$search[1]['type']="order_by";
+					$search[1]['value']="id_bimbingan desc";
+					$search[2]['type']="limit";
+					$search[2]['value']="1";
+					$id_bimbingan = json_decode($this->Tampil_Data('bimbingan', '', $search), true)['data'][0]['id_bimbingan'];
+					
+					$data = $this->input->post('listprogress');
+					$isi = array(
+						'status_penyelesaian'=>'0',
+						'id_bimbingan'=>$id_bimbingan
+					);
+					$data = json_decode($data);
+					for($a=0;$a<sizeof($data); $a++){
+						$isi['nama_progress']=$data[$a];
+						$this->Tambah_Data($isi, 'bimbinganprogress');
+					}
 				break;
 			}
 		}else{
