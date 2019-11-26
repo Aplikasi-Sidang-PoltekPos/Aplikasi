@@ -70,6 +70,9 @@
       <?php
     }
   ?>
+  $('.select2').select2({
+    theme:'bootstrap'
+  });
 </script>
 </body>
 </html>

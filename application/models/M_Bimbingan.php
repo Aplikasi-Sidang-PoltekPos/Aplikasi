@@ -6,6 +6,7 @@ class M_Bimbingan extends CI_Model {
   public function get_bimbingan($cond=""){
     $this->db->select("*");
     $this->db->from("bimbingan");
+    $this->db->join('kegiatan_progress', 'kegiatan_progress.id_kegiatan_progress = bimbingan.id_kegiatan_progress', 'left');
     //$this->db->where('npm', '1174040');
     //Dari sini mah bukan contoh, ini mah buat kondisi dinamis
     if($cond!=""){
@@ -36,6 +37,13 @@ class M_Bimbingan extends CI_Model {
     }
   }
 
+  public function getBimbinganProgress($id_bimbingan){
+    $this->db->select('*');
+    $this->db->from('bimbingan_progress');
+    $this->db->where(array('id_bimbingan'=>$id_bimbingan));
+    return $this->db->get();
+  }
+
   public function getNotifikasiBimbingan($id_dosen){
     $this->db->select('count(*) as total_bimbingan');
     $this->db->from('bimbingan');
@@ -51,7 +59,6 @@ class M_Bimbingan extends CI_Model {
     $this->db->where(array('status_bimbingan'=>'1', 'id_proyek'=>$id_proyek));
     return $this->db->get()->row_array();
   }
-
 
   public function update($data, $where)
 	{

@@ -64,11 +64,7 @@ function load_progress_combo(){
     });
     
 }
-$("#id_kegiatan_progress").select2(
-  {
-    theme:"bootstrap"
-  }
-);
+
 $(function(){
   $('#save').on('click', function(){
     var fd = form_data('form-bimbingan');
@@ -84,6 +80,7 @@ $(function(){
           bimb_table.ajax.reload();
           $('#modal-bimbingan').modal('toggle');
           insert_bimbingan_progress();
+          
         }
       },error: function (xhr, ajaxOptions, thrownError) {
         alert(xhr.status);
@@ -91,7 +88,9 @@ $(function(){
         alert(xhr.responseText);
       }
     });
+    
   });
+  
   $('#tambah-bimbingan-progress').on('click', function(){
     var html = "<li>";
         html += '<span class="text">ISIKONTEN</span>';
@@ -103,15 +102,21 @@ $(function(){
         var progress = $('#judul-bimbingan-progress').val();
         var content = html.replace('ISIKONTEN', progress);
         $('#list-bimbingan-progress').append(content);
+        $('#judul-bimbingan-progress').val("");
   });
   $('#list-bimbingan-progress').on('click', '#hapus-progress', function(){
     $(this).closest('li').remove();
     //$(this).closest('li').find('span').text();
   });
 });
-$('.select2').select2({
-  'theme':bootstrap
-});
+
+function resetModal(){
+  $('#tgl_bimbingan').val();
+  $('#id_kegiatan_progress').eq(0).prop('selected', true);
+  $('#list-bimbingan-progress').empty();
+  $('#judul-bimbingan-progress').val("");
+}
+
 function insert_bimbingan_progress(){
   var data = [];
   $('ul#list-bimbingan-progress span').each(function(){

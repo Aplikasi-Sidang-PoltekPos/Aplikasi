@@ -10,7 +10,7 @@
               <div class="col-md-12">
                 <div class="card bg-primary">
                   <div class="card-header">
-                <center><h3 class="card-title">Jabatan : Koordinator</h3></center>
+                  <center><h3 class="card-title">Jabatan : Koordinator</h3></center>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i>
@@ -20,7 +20,7 @@
               </div>
               <!-- /.card-header -->
               <center><div class="card-body">
-                Kegiatan : Proyek 3
+                Kegiatan : 
               </div></center>
               <!-- /.card-body -->
             </div>

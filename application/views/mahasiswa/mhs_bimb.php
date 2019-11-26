@@ -32,7 +32,7 @@
                     
                   </thead>
                   <tbody>
-
+  
                   </tbody>
                 </table>
               </div>
@@ -42,7 +42,7 @@
       </div>
     </section>
   </div>
-  <?php $this->load->view('common/footer'); ?>
+  <?php $this->load->view('common/footer'); ?>  
       <div class="modal fade" id="modal-bimbingan">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -57,11 +57,11 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label>Tanggal Bimbingan</label>
-                    <input class="form-control" type="date" name="tgl_bimbingan">
+                    <input class="form-control" type="date" name="tgl_bimbingan" id="tgl_bimbingan">
                   </div>
                   <div class="form-group">
                     <label>Tema Pembahasan</label>
-                    <select class="form-control select2" style="width:100%;" name="id_kegiatan_progress" id="id_kegiatan_progress">
+                    <select class="form-control" style="width:100%;" name="id_kegiatan_progress" id="id_kegiatan_progress">
                     </select>
                   </div>
                   <div class="form-group">
@@ -89,3 +89,4 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+    

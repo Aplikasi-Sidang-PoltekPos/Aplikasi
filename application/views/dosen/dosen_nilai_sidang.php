@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Penilaian</h1>
+            <h1>Penilaian Pembimbing</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -21,43 +21,23 @@
     <!-- Main content -->
 
     <section class="content">
-
       <div class="container-fluid">
         <div class="row">
-
-          <!-- /.col -->
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header">
-              	<div class="col-md-2">
-
-               </div>
-
-                <div class="card-tools">
-                  <ul class="pagination pagination-sm m-0 float-right">
-                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                  </ul>
+              <div class="card-header pb-1 pl-1">
+              	<div class="col-md-3">
+                  <select class="form-control" id="select-nilai">
+                    <option>Pembimbing</option>
+                    <option>Penguji</option>
+                  </select>
                 </div>
               </div>
-              <!-- /.card-header -->
+              <!-- /.card-h=eader -->
               <div class="card-body p-0">
-                <table class="table">
+                <table class="table" id="data-sidang">
                   <thead>
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Nama Mahasiswa</th>
-                      <th>Judul</th>
-                      <th>Pembimbing</th>
-                      <th>Penguji</th>
-                      <th>Nilai</th>
-                      <th>Status Nilai</th>
-                      <th style="width: 50px">Action</th>
-                      <th style="width: 50px"></th>
-                    </tr>
+                    
                   </thead>
                   <tbody>
                     
@@ -80,19 +60,9 @@
     </section>
     <!-- /.content -->
   </div>
-  <?php $this->load->view('common/footer');?>
+
   <script>
-  	$(function(){
-  		$("#save").click(function(){
-  			$('#modal-default').modal('toggle');
-  			Swal.fire('Success', 'Data Submitted ', 'success');
-  		});
-  		$("#tetap").click(function(){
-
-  			Swal.fire('Success', 'Nilai Ditetapkan', 'success');
-  		});
-
-  	});
+  	
   </script>
         <div class="modal fade" id="modal-default">
         <div class="modal-dialog">
@@ -145,3 +115,4 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+      <?php $this->load->view('common/footer');?>

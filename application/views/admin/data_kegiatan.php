@@ -85,10 +85,9 @@
     </section>
     <!-- /.content -->
   </div>
-  <?php $this->load->view('common/footer');?>
 
       <div class="modal fade" id="modal-kegiatan">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">Form Kegiatan</h4>
@@ -99,7 +98,7 @@
             <div class="modal-body">
               <form id="form-kegiatan">
                 <div class="row">
-                  <div class ="col-md-6">
+                  <div class ="col-md-12">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nama Kegiatan</label>
                   <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" placeholder="Kegiatan">
@@ -107,7 +106,7 @@
                   </div>
                 </div>
                 <div class="row">
-                <div class ="col-md-6">
+                <div class ="col-md-12">
                 <div class="form-group">
                   <label>Koordinator</label>
                   <select class="form-control select2" style="width:100%;" name="id_koordinator" id="id_koordinator">
@@ -117,7 +116,7 @@
                 </div>
                  </div>
                  <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <div class="form-group">
                       <label>Tanggal Mulai - Tanggal Selesai</label>
                       <div class="input-group mb-3">
@@ -136,7 +135,7 @@
                   </div>
                 </div>
                  <div class ="row">
-                  <div class ="col-md-3">
+                  <div class ="col-md-6">
                     <div class="form-group">
                       <label>Tahun Ajaran</label>
                       <select class="form-control" style="width: 100%;" id="angkatan" name="angkatan">
@@ -146,7 +145,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class ="col-md-3">
+                  <div class ="col-md-6">
                     <div class="form-group">
                       <label>Semester</label>
                       <select class="form-control" style="width: 100%;" id="semester" name="semester">
@@ -172,3 +171,4 @@
       </div>
       <!-- /.modal -->
     </div>
+    <?php $this->load->view('common/footer');?>

@@ -91,6 +91,10 @@ class Mahasiswa extends CI_Controller {
 		echo $progress;
 	}
 
+	public function CekParameterBimbingan(){
+		echo $this->Tampil_Data('progress', '', array('id_kegiatan'=>$_SESSION['id_kegiatan']));
+	}
+
 	public function Proyek($a="")
 	{
 		if(isset($_SESSION['status_anggota'])){

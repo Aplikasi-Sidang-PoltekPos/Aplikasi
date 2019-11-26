@@ -77,7 +77,7 @@ class Admin extends CI_Controller {
 			break;
 			case "DataKoor":
 				$search[0]['type']="where";
-				$search[0]['value']="nik not in ((select id_koordinator from kegiatan where status_mulai = '1'))";
+				$search[0]['value']="nik not in ((select id_koordinator from kegiatan where status_mulai in('0','1')))";
 				$search[1]['type']="where";
 				$search[1]['value']=array('prodi'=>$_SESSION['prodi']);
 				echo $this->Tampil_Data('dosen', '', $search);

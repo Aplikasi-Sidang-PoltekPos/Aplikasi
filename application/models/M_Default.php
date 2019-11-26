@@ -19,5 +19,14 @@ class M_Default extends CI_Model {
         }else{
             return array('status'=>'0', 'message'=>$this->db->error());
         }
-	}
+    }
+    
+    public function select_where($where, $table){
+        $isi = $this->db->get_where($table, $where);
+        if($isi){
+            return array('status'=>'1','isi'=>$isi);
+        }else{
+            return array('status'=>'0', 'message'=>$this->db->error());
+        }
+    }
 }

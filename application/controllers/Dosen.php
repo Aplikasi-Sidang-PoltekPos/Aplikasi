@@ -70,6 +70,7 @@ class Dosen extends CI_Controller {
 		$data['nav_open'] = "";
 		if(isset($_SESSION['stat_koor'])){
 			$data['stat_koor'] = $_SESSION['stat_koor'];
+			
 		}
 		$data = array_merge($data, $this->con_config);
 		$this->load->view('dosen/dosen_dash',$data);
@@ -127,7 +128,7 @@ class Dosen extends CI_Controller {
 			break;
 			case "Data":
 				$search[0]['type']="where";
-				$search[0]['value']=array('proyek.id_dosen_pembimbing'=>$_SESSION['id_user']);
+				$search[0]['value']=array('id_dosen_pembimbing'=>$_SESSION['id_user']);
 				$search[1]['type']="group_by";
 				$search[1]['value']="judul_proyek";
 				echo $this->Tampil_Data('proyek', '', $search);
@@ -157,10 +158,27 @@ class Dosen extends CI_Controller {
 			break;
 			case "Detail:Approve":
 				$data = $this->input->post();
-				$data['status_bimbingan']="1";
+				$data_progress = json_decode($data['checkId_group'], true);
+				$progress_where[0] = "";
+				$progress_where[1] = "";
+				for($a=0;$a<sizeof($data_progress);$a++){
+					if($data_progress[$a]['status']=="0"){
+						$progress_where[0].=$data_progress[$a]['id'];
+					}else{
+						$progress_where[1].=$data_progress[$a]['id'];
+					}
+				}
+				if($progress_where[0]!=""){
+					$this->Ubah_Data(array('status_penyelesaian'=>'0'), 'id_bimbingan_progress in('.$progress_where[0].')','progressbimbingan');
+				}
+				if($progress_where[1]!=""){
+					$this->Ubah_Data(array('status_penyelesaian'=>'1'), 'id_bimbingan_progress in('.$progress_where[1].')','progressbimbingan');
+				}
+				unset($data['checkId_group']);
 				$where = array('id_bimbingan'=>$data['id_bimbingan']);
 				echo $this->Ubah_Data($data, $where, 'bimbingan');
 			break;
+			
 			case "Detail:Sidang":
 				$total_bimbingan = $this->input->post('total_bimbingan');
 				if($total_bimbingan>=8){
@@ -175,9 +193,39 @@ class Dosen extends CI_Controller {
 					}
 				}
 			break;
+			case "Detail:ProgressBimbingan":
+				$data = $this->input->post();
+				echo $this->Tampil_Data('bimbingan_progress', '', 'id_bimbingan = "'.$data['id_bimbingan'].'"');
+			break;
+			case "Input:ProgressBimbingan":
+				$data = $this->input->post();
+				echo $this->Ubah_Data($data, array('id_bimbingan_progress'=>$data['id_bimbingan_progress']), 'progressbimbingan');
+			break;
 		}
 	}
 
+	public function Sidang($a=""){
+		switch($a){
+			case "":
+				$data['nav_active'] = "nilai_sidang";
+				$data['nav_open'] = "sidang";
+				$data['jscallurl'] = "dosen/dosen_nilai_sidang.js";
+				$data = array_merge($data, $this->con_config);
+				$this->load->view('dosen/dosen_nilai_sidang', $data);
+			break;
+			case "Data":
+				$data = $this->input->post();
+				$where['status_proyek']="3";
+				switch($data['option']){
+					case "Penguji": $where['id_dosen_penguji'] = $_SESSION['id_user']; break;
+					case "Pembimbing": $where['id_dosen_pembimbing'] = $_SESSION['id_user']; break;
+				}
+				$search[0]['type']="where";
+				$search[0]['value']=$where;
+				echo $this->Tampil_Data('proyek', '', $search);
+			break;
+		}
+	}
 	public function nilai_pembimbing()
 	{
 		$data['nav_active'] = "nilai_pembimbing";
@@ -237,6 +285,7 @@ class Dosen extends CI_Controller {
 			case "proyek": $db_call = $this->M_Proyek->get_proyek($where); break;
 			case "kegiatan": $db_call = $this->M_Kegiatan->get_kegiatan($where); break;
 			case "kegiatan_progress": $db_call = $this->M_Kegiatan->get_kegiatan_progress($where);
+			default: $db_call = $this->M_Default->select_where($where, $table);
 		}
 		if($db_call['status']=='1'){
 			$data['data'] = $db_call['isi']->result();
@@ -292,6 +341,10 @@ class Dosen extends CI_Controller {
 				$table = "kegiatan";
 				$notification['message'] = "Pengaturan berhasil Diperbaharui";
 			break;
+			case "progressbimbingan":
+				$table = "bimbingan_progress";
+				$notification['message'] = "success";
+			break;
 		}
 		$query = $this->M_Default->update($data, $where, $table);
 		if($query['status']=='1'){
@@ -345,11 +398,11 @@ class Dosen extends CI_Controller {
 			break;
 			case "Data":
 				$search[0]['type']="where";
-				$search[0]['value']=array('kegiatan.prodi'=>$_SESSION['prodi']);
+				$search[0]['value']=array('prodi'=>$_SESSION['prodi']);
 				$search[1]['type']="where";
-				$search[1]['value']=array('proyek.status_proyek'=>'1'); //Awalnya 0
+				$search[1]['value']=array('status_proyek'=>'1'); //Awalnya 0
 				$search[2]['type']="where";
-				$search[2]['value']=array('proyek.id_kegiatan'=>$_SESSION['stat_koor']['id_kegiatan']);
+				$search[2]['value']=array('id_kegiatan'=>$_SESSION['stat_koor']['id_kegiatan']);
 				//$search[3]['type']="group_by";
 				//$search[3]['value']="proyek.judul_proyek";
 				echo $this->Tampil_Data('proyek', "", $search);
@@ -396,11 +449,11 @@ class Dosen extends CI_Controller {
 			break;
 			case "Data":
 				$search[0]['type']="where";
-				$search[0]['value']=array('kegiatan.prodi'=>$_SESSION['prodi']);
+				$search[0]['value']=array('prodi'=>$_SESSION['prodi']);
 				$search[1]['type']="where";
-				$search[1]['value']=array('proyek.status_proyek'=>'3'); //Awalnya 2
+				$search[1]['value']=array('status_proyek'=>'3'); //Awalnya 2
 				$search[2]['type']="where";
-				$search[2]['value']=array('proyek.id_kegiatan'=>$_SESSION['stat_koor']['id_kegiatan']);
+				$search[2]['value']=array('id_kegiatan'=>$_SESSION['stat_koor']['id_kegiatan']);
 				echo $this->Tampil_Data('proyek', "", $search);
 			break;
 			case "DataPenguji":

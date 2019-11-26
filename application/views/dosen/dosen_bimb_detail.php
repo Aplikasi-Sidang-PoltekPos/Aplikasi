@@ -78,12 +78,18 @@
               <form>
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Pembahasan</label>
-                    <textarea class="form-control" rows="3" placeholder="Pembahasan" id="catatan"></textarea>
+                    <label>Progress</label>
+                    <ul class="todo-list" data-widget="todo-list" id="bimbingan-progress">
+                      
+                    </ul>
+                  </div>
+                  <div class="form-group">
+                    <label>Catatan Dosen</label>
+                    <textarea class="form-control"></textarea>
                   </div>
                   <div class="form-group">
                     <label>Nilai</label>
-                    <input type="number" max="100" min="0" id="nilai" value="0">
+                    <input type="number" max="100" min="0" id="nilai" value="0" class="form-control">
                   </div>
                 </div>
               </form>

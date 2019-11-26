@@ -1,4 +1,37 @@
 var refreshData = true;
+loadProgressBimbingan();
+function loadProgressBimbingan(id_bimbingan){
+    var fd = new FormData();
+    fd.append('id_bimbingan', id_bimbingan);
+    var html = "<li>";
+    html+='<div class="icheck-primary d-inline ml-2">';
+    html+='<input type="checkbox" name="IDKONTEN" value="IDKONTEN" id="IDKONTEN" stat>'
+    html+='<label for="IDKONTEN"></label>';
+    html+='</div>';
+    html+='<span class="text">ISIKONTEN</span>';
+    html+='</li>';
+    $.ajax({
+        url:base_url("Dosen/Bimbingan/Detail:ProgressBimbingan"),
+        type:'POST',
+        data:fd,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            var res = JSON.parse(response);
+            $('#bimbingan-progress').empty();
+            $.each(res.data, function(key, val){
+                var output = html;
+                output = output.replace("ISIKONTEN",val.nama_progress).replace(/IDKONTEN/g, val.id_bimbingan_progress);
+                if(val.status_penyelesaian=="1"){
+                    output = output.replace("stat", "checked");
+                }else{
+                    output = output.replace("stat", "");
+                }
+                $('#bimbingan-progress').append(output);
+            });
+        }
+    });
+  }
 var bimb_table = $('#data-bimbingan').DataTable({
     "ajax": {
       "type":"POST",
@@ -18,14 +51,10 @@ var bimb_table = $('#data-bimbingan').DataTable({
     "columns": [
       {"render":function(data, type, row, meta){return '';}, title:"#", "orderable":false},
       {"data": "tgl_bimbingan", title:"Tanggal Bimbingan"},
-      {"data": "keterangan", title:"Pembahasan"},
+      {"data": "judul_progress", title:"Progress"},
       {"render":
         function(data, type, row, meta){
-            if(row.status_bimbingan=="0"){
-                return "<button class='btn btn-primary' id='approve'>Approve</button>";
-            }else{
-                return "Sudah Disetujui";
-            }
+            return '<button class="btn btn-primary">Aksi</button>';
         }, title:"Status Approval"
       }
     ],
@@ -46,15 +75,28 @@ var bimb_table = $('#data-bimbingan').DataTable({
           cell.innerHTML = i+1;
       });
   }).draw();
+  
+  
+  function getProgressBimbingan(id_bimbingan){
+    var textreturn = "";
+    var res = JSON.parse(session.getSession('progressBimbingan'));
+    $.each(res.data, function(key, val){
+        if(val.id_bimbingan==id_bimbingan){
+            switch(val.status_penyelesaian){
+                case "0": textreturn = textreturn+"<input type='checkbox' value='"+val.id_bimbingan_progress+"'>"+val.nama_progress+"<br>"; break;
+                case "1": textreturn = textreturn+"<input type='checkbox' value='"+val.id_bimbingan_progress+"' checked>"+val.nama_progress+"<br>"; break;
+            }
+        }
+    });
+    return textreturn;
+  }
 
 $(function(){
-    setInterval(function(){
-        bimb_table.ajax.reload();
-    }, 5000);
-    $("#data-bimbingan tbody").on('click', '#approve', function(){
+    
+    $("#data-bimbingan tbody").on('click', 'button', function(){
         var data = bimb_table.row( $(this).parents('tr') ).data();
-        var fd = {id_bimbingan:data.id_bimbingan, id_proyek:data.id_proyek};
-        session.setSession("fd", JSON.stringify(fd));
+        session.setSession("id_bimbingan", data.id_bimbingan);
+        loadProgressBimbingan(data.id_bimbingan);
         $('#modal-bimbingan').modal('toggle');
     });
     $('#opsi-tampil').on('change', function(){
@@ -62,15 +104,21 @@ $(function(){
     });
 
     $('#save').on('click', function(){
-        var data = JSON.parse(sessionStorage.getItem("fd"));
+        var checkedId = [];
+        $.each($('#modal-bimbingan').find("input[type='checkbox']"), function(){
+            if($(this).prop('checked')){
+                checkedId.push({"id":$(this).val(), "status":"1"});
+            }else{
+                checkedId.push({"id":$(this).val(), "status":"0"});
+            }
+        });
         var fd = new FormData();
-        for ( var key in data ) {
-            fd.append(key, data[key]);
-        }
         fd.append('catatan', $('#catatan').val());
         fd.append('nilai_bimbingan', $('#nilai').val());
+        fd.append('id_bimbingan', session.getSession("id_bimbingan"));
+        fd.append('checkId_group', JSON.stringify(checkedId));
         $.ajax({
-            url:window.location.href+":Approve",
+            url:base_url("Dosen/Bimbingan/Detail:Approve"),
             data:fd,
             type:'POST',
             contentType: false,
