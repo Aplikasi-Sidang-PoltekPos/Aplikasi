@@ -85,7 +85,7 @@
                   </div>
                   <div class="form-group">
                     <label>Catatan Dosen</label>
-                    <textarea class="form-control"></textarea>
+                    <textarea class="form-control" id="catatan"></textarea>
                   </div>
                   <div class="form-group">
                     <label>Nilai</label>

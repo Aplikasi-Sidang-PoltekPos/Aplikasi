@@ -46,7 +46,7 @@
     input[type=number]::webkit-inner-spin-button,
     input[type=number]::webkit-outer-spin-button{
       -webkit-appearance: none;
-      margin: 0
+      margin: 0;
     }
     input[type=number] {
       -moz-appearance:textfield; /* Firefox */
@@ -154,14 +154,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">Notifikasi</span>
           <div class="dropdown-divider"></div>
-          <?php if($status_user=="D"){
-            ?>
-            <a href="<?php echo base_url(); ?>dosen/bimbingan/" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> <?=$notifikasi['bimbingan']?> Bimbingan Perlu Approval
-              <span class="float-right text-muted text-sm">#</span>
-            </a>
-            <?php
-          } ?>
+          
           <div class="dropdown-divider"></div>
           <a href="<?php echo base_url(); ?>assets/theme/#" class="dropdown-item">
             <i class="fas fa-users mr-2"></i> 8 friend requests

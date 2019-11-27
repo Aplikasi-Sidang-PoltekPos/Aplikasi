@@ -1,7 +1,7 @@
 var bimb_table = $('#data-bimbingan').DataTable({
     "ajax": {
       "type":"GET",
-      "url":window.location.href+"/Data",
+      "url":base_url("Mahasiswa/Bimbingan/Data"),
       "dataSrc": function(json){
         return json.data;
       }
@@ -40,9 +40,7 @@ var bimb_table = $('#data-bimbingan').DataTable({
       });
   }).draw();
 
-setInterval(function(){
-    bimb_table.ajax.reload();
-}, 5000);
+
 load_progress_combo();
 function load_progress_combo(){
     $("#id_kegiatan_progress").empty();
@@ -80,7 +78,7 @@ $(function(){
           bimb_table.ajax.reload();
           $('#modal-bimbingan').modal('toggle');
           insert_bimbingan_progress();
-          
+          load_progress_combo();
         }
       },error: function (xhr, ajaxOptions, thrownError) {
         alert(xhr.status);
@@ -92,23 +90,42 @@ $(function(){
   });
   
   $('#tambah-bimbingan-progress').on('click', function(){
-    var html = "<li>";
-        html += '<span class="text">ISIKONTEN</span>';
-        html += '<div class="tools">';
-        html += '<i class="fas fa-trash-alt" id="hapus-progress"></i>';
-        html += '<i class="fas fa-search" id="coba-progress"></i>';
-        html += '</div>';
-        html += '</li>';
-        var progress = $('#judul-bimbingan-progress').val();
-        var content = html.replace('ISIKONTEN', progress);
-        $('#list-bimbingan-progress').append(content);
-        $('#judul-bimbingan-progress').val("");
+    add_bimbingan_progress();
+  });
+  
+  $('#judul-bimbingan-progress').focus(function(){
+    $(this).on('keypress', function(e){
+      if(e.which == 13){
+        add_bimbingan_progress();
+      }
+    });
+  });
+  $('input').keypress(function(e){
+    if(e.which==13){
+      return false;
+    }
   });
   $('#list-bimbingan-progress').on('click', '#hapus-progress', function(){
     $(this).closest('li').remove();
     //$(this).closest('li').find('span').text();
   });
 });
+
+function add_bimbingan_progress(){
+  if($('#judul-bimbingan-progress').val()!=""){
+    var html = "<li>";
+          html += '<span class="text">ISIKONTEN</span>';
+          html += '<div class="tools">';
+          html += '<i class="fas fa-trash-alt" id="hapus-progress"></i>';
+          html += '</div>';
+          html += '</li>';
+          var progress = $('#judul-bimbingan-progress').val();
+          var content = html.replace('ISIKONTEN', progress);
+          $('#list-bimbingan-progress').append(content);
+          $('#judul-bimbingan-progress').val("");
+          $('#judul-bimbingan-progress').focus();
+  }
+}
 
 function resetModal(){
   $('#tgl_bimbingan').val();

@@ -41,11 +41,7 @@ class Dosen extends CI_Controller {
 		$con_config['profile_name'] = $_SESSION['nama'];
 		$con_config['profile_link'] = base_url('Dosen/Profile');
 		$con_config['status_user'] = 'D';
-		if(!isset($_SESSION['notifikasi_bimbingan'])){
-			$data = $this->M_Bimbingan->getNotifikasiBimbingan($_SESSION['id_user']);
-			$_SESSION['notifikasi_bimbingan'] = $data->total_bimbingan;
-		}
-		$con_config['notifikasi']['bimbingan'] = $_SESSION['notifikasi_bimbingan'];
+		
 		if(isset($_SESSION['notification'])){
 			$con_config['notification'] = $_SESSION['notification'];
 		}
@@ -151,9 +147,8 @@ class Dosen extends CI_Controller {
 				$search[0]['value']=array('id_proyek'=>$data);
 				$search[1]['type']="where";
 				$search[1]['value']=array('status_bimbingan'=>$this->input->post('opsi_tampil'));
-				$tampil_bimbingan = $this->M_Bimbingan->get_jumlah_bimbingan($data);
+				$tampil_bimbingan = $this->M_Bimbingan->getTotalBimbingan($data);
 				$result = json_decode($this->Tampil_Data('bimbingan', '', $search), true);
-				$result = array_merge($result, $tampil_bimbingan);
 				echo json_encode($result);
 			break;
 			case "Detail:Approve":
@@ -163,16 +158,16 @@ class Dosen extends CI_Controller {
 				$progress_where[1] = "";
 				for($a=0;$a<sizeof($data_progress);$a++){
 					if($data_progress[$a]['status']=="0"){
-						$progress_where[0].=$data_progress[$a]['id'];
+						$progress_where[0].=$data_progress[$a]['id'].',';
 					}else{
-						$progress_where[1].=$data_progress[$a]['id'];
+						$progress_where[1].=$data_progress[$a]['id'].',';
 					}
 				}
 				if($progress_where[0]!=""){
-					$this->Ubah_Data(array('status_penyelesaian'=>'0'), 'id_bimbingan_progress in('.$progress_where[0].')','progressbimbingan');
+					$this->Ubah_Data(array('status_penyelesaian'=>'0'), 'id_bimbingan_progress in('.substr($progress_where[0], 0, strlen($progress_where[0])-1).')','progressbimbingan');
 				}
 				if($progress_where[1]!=""){
-					$this->Ubah_Data(array('status_penyelesaian'=>'1'), 'id_bimbingan_progress in('.$progress_where[1].')','progressbimbingan');
+					$this->Ubah_Data(array('status_penyelesaian'=>'1'), 'id_bimbingan_progress in('.substr($progress_where[1], 0, strlen($progress_where[1])-1).')','progressbimbingan');
 				}
 				unset($data['checkId_group']);
 				$where = array('id_bimbingan'=>$data['id_bimbingan']);

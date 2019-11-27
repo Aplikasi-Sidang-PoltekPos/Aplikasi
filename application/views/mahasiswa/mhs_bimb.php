@@ -42,7 +42,6 @@
       </div>
     </section>
   </div>
-  <?php $this->load->view('common/footer'); ?>  
       <div class="modal fade" id="modal-bimbingan">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -53,15 +52,11 @@
               </button>
             </div>
             <div class="modal-body">
-              <form role="form" id="form-bimbingan">
+              <form id="form-bimbingan">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Tanggal Bimbingan</label>
-                    <input class="form-control" type="date" name="tgl_bimbingan" id="tgl_bimbingan">
-                  </div>
-                  <div class="form-group">
                     <label>Tema Pembahasan</label>
-                    <select class="form-control" style="width:100%;" name="id_kegiatan_progress" id="id_kegiatan_progress">
+                    <select class="form-control select2" style="width:100%;" name="id_kegiatan_progress" id="id_kegiatan_progress">
                     </select>
                   </div>
                   <div class="form-group">
@@ -80,8 +75,8 @@
                 </div>
               </form>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button id="save" type="button" class="btn btn-primary">Save changes</button>
+              <button class="btn btn-default" data-dismiss="modal">Close</button>
+              <button id="save" class="btn btn-primary">Save changes</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -89,4 +84,5 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+      <?php $this->load->view('common/footer'); ?>  
     

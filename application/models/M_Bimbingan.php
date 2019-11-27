@@ -5,7 +5,7 @@ class M_Bimbingan extends CI_Model {
 
   public function get_bimbingan($cond=""){
     $this->db->select("*");
-    $this->db->from("bimbingan");
+    $this->db->from("v_bimbingan as bimbingan");
     $this->db->join('kegiatan_progress', 'kegiatan_progress.id_kegiatan_progress = bimbingan.id_kegiatan_progress', 'left');
     //$this->db->where('npm', '1174040');
     //Dari sini mah bukan contoh, ini mah buat kondisi dinamis
@@ -44,20 +44,11 @@ class M_Bimbingan extends CI_Model {
     return $this->db->get();
   }
 
-  public function getNotifikasiBimbingan($id_dosen){
+  public function getTotalBimbingan($id_proyek){
     $this->db->select('count(*) as total_bimbingan');
-    $this->db->from('bimbingan');
-    $this->db->join('proyek', 'bimbingan.id_proyek = proyek.id_proyek');
-    $this->db->where(array('status_bimbingan'=>'0', 'id_dosen_pembimbing'=>$id_dosen));
+    $this->db->from('v_bimbingan');
+    $this->db->where(array('id_proyek'=>$id_proyek, 'status_bimbingan'=>'1'));
     return $this->db->get()->row();
-  }
-
-  public function get_jumlah_bimbingan($id_proyek){
-    $this->db->select('count(*) as total_bimbingan');
-    $this->db->select('(SELECT (SELECT min_bimbingan FROM kegiatan WHERE id_kegiatan = proyek.id_kegiatan) FROM proyek WHERE id_proyek = bimbingan.id_proyek) AS minimal_bimbingan, id_proyek');
-    $this->db->from('bimbingan');
-    $this->db->where(array('status_bimbingan'=>'1', 'id_proyek'=>$id_proyek));
-    return $this->db->get()->row_array();
   }
 
   public function update($data, $where)

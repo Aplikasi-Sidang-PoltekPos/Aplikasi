@@ -259,11 +259,12 @@ class Mahasiswa extends CI_Controller {
 				break;
 				case "Insert":
 					$data = $this->input->post();
+					$data['tgl_bimbingan'] = "".date('Y-m-d');
 					$data['id_proyek'] = $_SESSION['id_proyek'];
 					echo $this->Tambah_Data($data, 'bimbingan');
 				break;
 				case "GetProgress":
-					$search = array('id_kegiatan'=>$_SESSION['id_kegiatan']);
+					$search = "id_kegiatan = '".$_SESSION['id_kegiatan']."' and id_kegiatan_progress not in((select id_kegiatan_progress from bimbingan where id_proyek = '".$_SESSION['id_proyek']."'))";
 					echo $this->Tampil_Data('progress','',$search);
 				break;
 				case "InsertProgressBimbingan":
