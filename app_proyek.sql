@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2019 at 03:22 PM
+-- Generation Time: Nov 27, 2019 at 01:33 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -71,11 +71,17 @@ CREATE TABLE `bimbingan` (
   `tgl_bimbingan` date NOT NULL,
   `keterangan` varchar(50) NOT NULL,
   `catatan` varchar(300) NOT NULL,
-  `status_bimbingan` int(1) NOT NULL,
   `id_proyek` int(16) NOT NULL,
   `nilai_bimbingan` int(100) NOT NULL DEFAULT '0',
   `id_kegiatan_progress` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bimbingan`
+--
+
+INSERT INTO `bimbingan` (`id_bimbingan`, `tgl_bimbingan`, `keterangan`, `catatan`, `id_proyek`, `nilai_bimbingan`, `id_kegiatan_progress`) VALUES
+(33, '2019-11-26', '', '', 1, 0, 6);
 
 -- --------------------------------------------------------
 
@@ -89,6 +95,15 @@ CREATE TABLE `bimbingan_progress` (
   `status_penyelesaian` int(1) NOT NULL,
   `id_bimbingan` int(24) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bimbingan_progress`
+--
+
+INSERT INTO `bimbingan_progress` (`id_bimbingan_progress`, `nama_progress`, `status_penyelesaian`, `id_bimbingan`) VALUES
+(55, 'Coba', 0, 33),
+(56, 'Dulu', 0, 33),
+(57, 'Aja', 0, 33);
 
 -- --------------------------------------------------------
 
@@ -164,13 +179,9 @@ CREATE TABLE `kegiatan` (
 --
 
 INSERT INTO `kegiatan` (`id_kegiatan`, `prodi`, `nama_kegiatan`, `jenis_kegiatan`, `id_koordinator`, `status_mulai`, `angkatan`, `tgl_mulai`, `tgl_selesai`, `semester`, `min_bimbingan`, `persentase_sidang`, `persentase_bimbingan`, `persentase_progress`) VALUES
-(18, '14', 'Proyek I', NULL, '3217061702990004', 1, '2017/2018', '2019-10-01', '2019-10-09', '1', 10, 0, 0, 0),
-(19, '14', 'Proyek II', NULL, '3217061702990005', 0, '2017/2018', '2019-10-01', '2019-10-09', '2', 22, 11, 0, 0),
+(18, '14', 'Proyek I', NULL, '3217061702990005', 1, '2017/2018', '2019-10-01', '2019-10-09', '1', 10, 0, 0, 0),
 (20, '13', 'Coba', NULL, '3217061702990001', 1, '2017/2018', '2019-10-09', '2019-10-24', '4', 10, 0, 0, 0),
-(21, '14', 'qfqwf', NULL, '3217061702990005', 0, '2', '2019-10-17', '2019-10-31', '1', 8, 43, 57, 0),
-(22, '13', 'proyekyej', NULL, '3217061702990001', 1, '2', '2019-10-29', '2019-10-29', '1', 9, 80, 20, 0),
 (26, '14', 'saf', NULL, '3217061702990004', 1, '2', '0000-00-00', '0000-00-00', '1', 8, 50, 50, 0),
-(27, '13', 'asfsa', NULL, '3217061702990001', 1, '2', '1970-01-23', '1970-01-15', '1', 8, 50, 50, 0),
 (28, '13', 'Proyek Coba', NULL, '3217061702990002', 0, '2017/2018', '2019-11-09', '2019-11-22', '2', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -190,12 +201,12 @@ CREATE TABLE `kegiatan_progress` (
 --
 
 INSERT INTO `kegiatan_progress` (`id_kegiatan_progress`, `judul_progress`, `id_kegiatan`) VALUES
-(1, 'afsafa', 19),
-(2, 'aazvsaf', 19),
-(3, 'aazvsafwwq', 19),
-(4, '1', 19),
 (6, 'CC', 18),
-(7, 'aaa', 18);
+(7, 'aaa', 18),
+(8, 'Bab 1', 18),
+(9, 'CA', 26),
+(10, 'Bab I', 26),
+(11, 'Bab II', 26);
 
 -- --------------------------------------------------------
 
@@ -388,7 +399,10 @@ CREATE TABLE `obyek_penelitian` (
 --
 
 INSERT INTO `obyek_penelitian` (`id_penelitian`, `nama_penelitian`, `id_prodi`) VALUES
-(0, 'Gak Ada', 0);
+(0, 'Gak Ada', 0),
+(1, 'Internet of Things', 14),
+(2, 'CC', 14),
+(3, 'ac', 14);
 
 -- --------------------------------------------------------
 
@@ -438,6 +452,14 @@ CREATE TABLE `proyek` (
   `npm_anggota` char(7) DEFAULT NULL,
   `alasan_approval` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `proyek`
+--
+
+INSERT INTO `proyek` (`id_proyek`, `judul_proyek`, `abstrak`, `keyword_abstrak`, `latar_belakang`, `identifikasi_masalah`, `daftar_pustaka`, `id_penelitian`, `id_kegiatan`, `id_dosen_pembimbing`, `id_dosen_penguji`, `tgl_sidang`, `tgl_sidang_ulang`, `nilai_pembimbing`, `nilai_penguji`, `ruangan`, `npm_ketua`, `status_proyek`, `npm_anggota`, `alasan_approval`) VALUES
+(1, 'qfqwfq', 'qwfqwf', 'qwfqwfqw', 'qwwfqwf', 'qwfqwfwq', 'qwfwqfq', NULL, 18, '3217061702990004', NULL, NULL, NULL, NULL, NULL, NULL, '1174002', 2, '1174001', ''),
+(2, 'qfasoif', 'qwfwqoifq', 'qwfoiqwoifq', 'qwoifnqw', 'oinqwoifwq', 'ijqwoifjqw', NULL, 26, '3217061702990005', NULL, NULL, NULL, NULL, NULL, NULL, '1174003', 2, '1174004', 'Cobain');
 
 -- --------------------------------------------------------
 
@@ -585,6 +607,85 @@ INSERT INTO `user` (`id_user`, `pass`, `jabatan`) VALUES
 ('3217061702990009', '3217061702990009', 'A'),
 ('3217061702990010', '3217061702990010', 'A');
 
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_bimbingan`
+-- (See below for the actual view)
+--
+CREATE TABLE `v_bimbingan` (
+`id_bimbingan` int(24)
+,`tgl_bimbingan` date
+,`keterangan` varchar(50)
+,`catatan` varchar(300)
+,`id_proyek` int(16)
+,`nilai_bimbingan` int(100)
+,`id_kegiatan_progress` int(11)
+,`status_bimbingan` varchar(1)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_proyek`
+-- (See below for the actual view)
+--
+CREATE TABLE `v_proyek` (
+`id_proyek` int(16)
+,`judul_proyek` text
+,`abstrak` text
+,`keyword_abstrak` text
+,`latar_belakang` text
+,`identifikasi_masalah` text
+,`daftar_pustaka` text
+,`id_penelitian` int(4)
+,`id_kegiatan` int(8)
+,`id_dosen_pembimbing` char(16)
+,`id_dosen_penguji` char(16)
+,`tgl_sidang` date
+,`tgl_sidang_ulang` date
+,`nilai_pembimbing` decimal(5,0)
+,`nilai_penguji` decimal(5,0)
+,`ruangan` varchar(4)
+,`npm_ketua` char(7)
+,`status_proyek` int(1)
+,`npm_anggota` char(7)
+,`alasan_approval` text
+,`nama_kegiatan` varchar(40)
+,`prodi` char(2)
+,`id_koordinator` char(16)
+,`status_mulai` int(1)
+,`angkatan` varchar(9)
+,`semester` char(1)
+,`min_bimbingan` int(2)
+,`persentase_sidang` int(3)
+,`persentase_bimbingan` int(3)
+,`persentase_progress` int(3)
+,`nama_dosen_pembimbing` varchar(75)
+,`nama_koordinator` varchar(75)
+,`nama_ketua` varchar(75)
+,`nama_anggota` varchar(75)
+,`total_bimbingan` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_bimbingan`
+--
+DROP TABLE IF EXISTS `v_bimbingan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_bimbingan`  AS  select `bimbingan`.`id_bimbingan` AS `id_bimbingan`,`bimbingan`.`tgl_bimbingan` AS `tgl_bimbingan`,`bimbingan`.`keterangan` AS `keterangan`,`bimbingan`.`catatan` AS `catatan`,`bimbingan`.`id_proyek` AS `id_proyek`,`bimbingan`.`nilai_bimbingan` AS `nilai_bimbingan`,`bimbingan`.`id_kegiatan_progress` AS `id_kegiatan_progress`,(select if((count(0) = sum(`bimbingan_progress`.`status_penyelesaian`)),'1','0') from `bimbingan_progress` where (`bimbingan_progress`.`id_bimbingan` = `bimbingan`.`id_bimbingan`)) AS `status_bimbingan` from `bimbingan` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_proyek`
+--
+DROP TABLE IF EXISTS `v_proyek`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_proyek`  AS  select `proyek`.`id_proyek` AS `id_proyek`,`proyek`.`judul_proyek` AS `judul_proyek`,`proyek`.`abstrak` AS `abstrak`,`proyek`.`keyword_abstrak` AS `keyword_abstrak`,`proyek`.`latar_belakang` AS `latar_belakang`,`proyek`.`identifikasi_masalah` AS `identifikasi_masalah`,`proyek`.`daftar_pustaka` AS `daftar_pustaka`,`proyek`.`id_penelitian` AS `id_penelitian`,`proyek`.`id_kegiatan` AS `id_kegiatan`,`proyek`.`id_dosen_pembimbing` AS `id_dosen_pembimbing`,`proyek`.`id_dosen_penguji` AS `id_dosen_penguji`,`proyek`.`tgl_sidang` AS `tgl_sidang`,`proyek`.`tgl_sidang_ulang` AS `tgl_sidang_ulang`,`proyek`.`nilai_pembimbing` AS `nilai_pembimbing`,`proyek`.`nilai_penguji` AS `nilai_penguji`,`proyek`.`ruangan` AS `ruangan`,`proyek`.`npm_ketua` AS `npm_ketua`,`proyek`.`status_proyek` AS `status_proyek`,`proyek`.`npm_anggota` AS `npm_anggota`,`proyek`.`alasan_approval` AS `alasan_approval`,`kegiatan`.`nama_kegiatan` AS `nama_kegiatan`,`kegiatan`.`prodi` AS `prodi`,`kegiatan`.`id_koordinator` AS `id_koordinator`,`kegiatan`.`status_mulai` AS `status_mulai`,`kegiatan`.`angkatan` AS `angkatan`,`kegiatan`.`semester` AS `semester`,`kegiatan`.`min_bimbingan` AS `min_bimbingan`,`kegiatan`.`persentase_sidang` AS `persentase_sidang`,`kegiatan`.`persentase_bimbingan` AS `persentase_bimbingan`,`kegiatan`.`persentase_progress` AS `persentase_progress`,(select `dosen`.`nama` from `dosen` where (`dosen`.`nik` = `proyek`.`id_dosen_pembimbing`)) AS `nama_dosen_pembimbing`,(select `dosen`.`nama` from `dosen` where (`dosen`.`nik` = `kegiatan`.`id_koordinator`)) AS `nama_koordinator`,(select `mahasiswa`.`nama` from `mahasiswa` where (`mahasiswa`.`npm` = `proyek`.`npm_ketua`)) AS `nama_ketua`,(select `mahasiswa`.`nama` from `mahasiswa` where (`mahasiswa`.`npm` = `proyek`.`npm_anggota`)) AS `nama_anggota`,(select count(0) from `v_bimbingan` where ((`v_bimbingan`.`status_bimbingan` = '1') and (`v_bimbingan`.`id_proyek` = `proyek`.`id_proyek`))) AS `total_bimbingan` from (`proyek` left join `kegiatan` on((`proyek`.`id_kegiatan` = `kegiatan`.`id_kegiatan`))) ;
+
 --
 -- Indexes for dumped tables
 --
@@ -679,13 +780,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bimbingan`
 --
 ALTER TABLE `bimbingan`
-  MODIFY `id_bimbingan` int(24) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_bimbingan` int(24) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `bimbingan_progress`
 --
 ALTER TABLE `bimbingan_progress`
-  MODIFY `id_bimbingan_progress` int(36) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_bimbingan_progress` int(36) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `kegiatan`
@@ -697,7 +798,7 @@ ALTER TABLE `kegiatan`
 -- AUTO_INCREMENT for table `kegiatan_progress`
 --
 ALTER TABLE `kegiatan_progress`
-  MODIFY `id_kegiatan_progress` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kegiatan_progress` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `notifikasi`
@@ -709,13 +810,13 @@ ALTER TABLE `notifikasi`
 -- AUTO_INCREMENT for table `obyek_penelitian`
 --
 ALTER TABLE `obyek_penelitian`
-  MODIFY `id_penelitian` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_penelitian` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `proyek`
 --
 ALTER TABLE `proyek`
-  MODIFY `id_proyek` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proyek` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
