@@ -226,7 +226,7 @@ class Admin extends CI_Controller {
 				$excelreader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
 				$loadexcel = $excelreader->load($file_tmp); // Load file yang telah diupload ke folder excel
 				$sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
-
+				//Cobain dulu aja
 				// Buat sebuah variabel array untuk menampung array data yg akan kita insert ke database
 				$data = array();
 				$numrow = 0;

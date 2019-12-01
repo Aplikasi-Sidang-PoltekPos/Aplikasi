@@ -162,8 +162,7 @@ class Dosen extends CI_Controller {
 					}else{
 						$progress_where[1].=$data_progress[$a]['id'].',';
 					}
-				}
-				if($progress_where[0]!=""){
+				}if($progress_where[0]!=""){
 					$this->Ubah_Data(array('status_penyelesaian'=>'0'), 'id_bimbingan_progress in('.substr($progress_where[0], 0, strlen($progress_where[0])-1).')','progressbimbingan');
 				}
 				if($progress_where[1]!=""){
