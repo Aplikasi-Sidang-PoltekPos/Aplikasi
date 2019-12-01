@@ -84,5 +84,52 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+      <div class="modal fade" id="modal-cek-progress">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Form Progress</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="form-bimbingan">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Tema Pembahasan</label>
+                    <input type="text" id="judul-progress" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Catatan</label>
+                    <textarea id="catatan" class="form-control">
+                      
+                    </textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-sm" id="judul-bimbingan-progress">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary btn-sm" type="button" id="tambah-bimbingan-progress" disabled>Submit</button>
+                        </div>
+                    </div>
+                    <ul class="todo-list" data-widget="todo-list" id="list-bimbingan-progress">
+                        
+                    </ul>
+                  </div>
+                  
+                </div>
+              </form>
+            <div class="modal-footer justify-content-between">
+              <button class="btn btn-default" data-dismiss="modal">Close</button>
+              <button id="save" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
       <?php $this->load->view('common/footer'); ?>  
     

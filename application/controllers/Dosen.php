@@ -170,6 +170,9 @@ class Dosen extends CI_Controller {
 					$this->Ubah_Data(array('status_penyelesaian'=>'1'), 'id_bimbingan_progress in('.substr($progress_where[1], 0, strlen($progress_where[1])-1).')','progressbimbingan');
 				}
 				unset($data['checkId_group']);
+				if($data['catatan']==""){
+					$data['catatan']=="Tidak ada";
+				}
 				$where = array('id_bimbingan'=>$data['id_bimbingan']);
 				echo $this->Ubah_Data($data, $where, 'bimbingan');
 			break;

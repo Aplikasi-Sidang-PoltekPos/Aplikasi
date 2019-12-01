@@ -10,15 +10,23 @@ var bimb_table = $('#data-bimbingan').DataTable({
       {"render":function(data, type, row, meta){return '';}, title:"#", "orderable":false},
       {"data": "tgl_bimbingan", title:"Tanggal Bimbingan", width:"20%"},
       {"render":function(data, type, row, meta){
-        return '<button class="btn btn-block btn-warning" id="cek-daftar-progress">Cek Daftar Progress</button>';
+        var buttoninit = '<button class="btn btn-block btn-warning" id="cek-daftar-progress">Cek Daftar Progress</button>';
+        if(row.status_bimbingan=="0" && row.catatan==""){
+          buttoninit=buttoninit.replace("btn-warning", "btn-default");
+        }else if(row.status_bimbingan=="1"){
+          buttoninit=buttoninit.replace("btn-warning", "btn-success");
+        }
+        return buttoninit;
       }, title:"Pembahasan"},
       {"render":
         function(data, type, row, meta){
-            if(row.status_bimbingan=="0"){
-                return "Belum Disetujui";
-            }else{
-                return "Sudah Disetujui";
-            }
+          if(row.status_bimbingan=="0" && row.catatan==""){
+            return 'Belum disetujui';
+          }else if(row.status_bimbingan=="1"){
+            return 'Sudah Disetujui';
+          }else{
+            return 'Perlu revisi';
+          }
         }, title:"Status Approval"
       }
     ],
@@ -79,6 +87,7 @@ $(function(){
           $('#modal-bimbingan').modal('toggle');
           insert_bimbingan_progress();
           load_progress_combo();
+          refresh_form_bimbingan();
         }
       },error: function (xhr, ajaxOptions, thrownError) {
         alert(xhr.status);
@@ -125,6 +134,13 @@ function add_bimbingan_progress(){
           $('#judul-bimbingan-progress').val("");
           $('#judul-bimbingan-progress').focus();
   }
+}
+
+function refresh_form_bimbingan(){
+  var modal = $('#modal-bimbingan');
+  modal.find('#id_kegiatan_progress').empty();
+  modal.find('#judul-bimbingan-progress').empty();
+  modal.find('#list-bimbingan-progress').empty();
 }
 
 function resetModal(){
@@ -182,4 +198,6 @@ function load_bimbingan_progress(){
         //$('#list-progress').append(html);
     }
   });
+
+  
 }
